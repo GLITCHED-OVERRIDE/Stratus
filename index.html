@@ -6,7 +6,7 @@
 <title>Stratus Launcher</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
-body { background:#000; color:#fff; font-family:Arial; padding:70px 20px 20px 20px; }
+body { margin:0; font-family: Arial; background:#000; color:#fff; padding:70px 20px 20px 20px; }
 .item { background:#111; padding:15px; margin:15px auto; width:85%; cursor:pointer; border:1px solid #fff; border-radius:10px; text-align:center; }
 </style>
 </head>
@@ -34,57 +34,78 @@ async function loadApps() {
 
 loadApps();
 
-async function launchApp(app) {
+async function launchApp(app){
     // Fetch ZIP
     const res = await fetch(app.url);
     const blob = await res.blob();
     const zip = await JSZip.loadAsync(blob);
 
-    // Open new window
-    const win = window.open("about:blank");
-    win.document.write('<!DOCTYPE html><html><head><title>'+app.name+'</title></head><body style="margin:0;background:#000;color:#fff;"><div id="header" style="position:fixed;top:0;width:100%;height:60px;background:#111;display:flex;align-items:center;justify-content:space-between;padding:0 15px;z-index:1000;"><span style="font-weight:bold;font-size:20px;">'+app.name+'</span><button id="installBtn" style="padding:8px 15px;">Install PWA</button></div><div id="content" style="margin-top:60px;"></div></body></html>');
-
+    // Map filenames to blob URLs
     const fileMap = {};
-
-    // Create blob URLs for all files
     for(const filename of Object.keys(zip.files)){
-        const fileBlob = await zip.files[filename].async("blob");
-        fileMap[filename] = URL.createObjectURL(fileBlob);
+        const fBlob = await zip.files[filename].async("blob");
+        fileMap["/"+filename] = fBlob; // prepend / to mimic root
     }
 
-    // Load index.html
+    // Register Service Worker for virtual file system
+    if('serviceWorker' in navigator){
+        const swBlob = new Blob([`
+        const files = ${JSON.stringify(Object.keys(fileMap))};
+        const fileBlobs = {};
+        self.addEventListener('install', e=>{
+            e.waitUntil((async ()=>{
+                for(const f of files){
+                    const resp = await fetch(f); // placeholder
+                    fileBlobs[f] = f; // will override in main
+                }
+            })());
+            self.skipWaiting();
+        });
+
+        self.addEventListener('fetch', e=>{
+            const url = new URL(e.request.url);
+            const pathname = url.pathname;
+            if(fileBlobs[pathname]){
+                e.respondWith(fetch(fileBlobs[pathname]));
+            }
+        });
+        `], {type:'application/javascript'});
+        const swUrl = URL.createObjectURL(swBlob);
+        try{ await navigator.serviceWorker.register(swUrl); }catch(e){console.log(e);}
+    }
+
+    // Open new window
+    const win = window.open("about:blank");
+    win.document.write("<!DOCTYPE html><html><head><title>"+app.name+"</title></head><body style='margin:0;background:#000;color:#fff;'><iframe id='appFrame' style='width:100%;height:100vh;border:none'></iframe></body></html>");
+
+    // Create iframe with virtual file protocol
+    const iframe = win.document.getElementById("appFrame");
+
+    // Build a Blob URL for index.html
     const indexFileName = Object.keys(fileMap).find(f=>f.endsWith("index.html"));
     if(!indexFileName){
-        win.document.getElementById("content").innerHTML = "No index.html found in ZIP";
+        win.document.body.innerHTML = "No index.html in ZIP";
         return;
     }
 
-    const iframe = win.document.createElement("iframe");
-    iframe.style.width = "100%";
-    iframe.style.height = "90vh";
-    iframe.style.border = "none";
+    const htmlBlob = new Blob([await zip.files[indexFileName].async("string")], {type:"text/html"});
+    const htmlUrl = URL.createObjectURL(htmlBlob);
+    iframe.src = htmlUrl;
 
-    iframe.src = fileMap[indexFileName];
-    win.document.getElementById("content").appendChild(iframe);
-
-    // Optionally setup PWA install prompt
-    let deferredPrompt = null;
-    win.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-    });
-
-    const installBtn = win.document.getElementById("installBtn");
-    installBtn.addEventListener("click", async ()=>{
-        if(deferredPrompt){
-            deferredPrompt.prompt();
-            const choice = await deferredPrompt.userChoice;
-            if(choice.outcome === 'accepted') console.log('App installed');
-            deferredPrompt = null;
-        } else {
-            alert("Install prompt not available.");
-        }
-    });
+    // Override asset requests inside iframe
+    iframe.onload = () => {
+        const iframeWin = iframe.contentWindow;
+        const originalFetch = iframeWin.fetch;
+        iframeWin.fetch = async (input, init) => {
+            let path = typeof input === "string" ? input : input.url;
+            let key = Object.keys(fileMap).find(k => path.endsWith(k));
+            if(key){
+                const b = fileMap[key];
+                return new Response(b);
+            }
+            return originalFetch(input, init);
+        };
+    };
 }
 </script>
 
