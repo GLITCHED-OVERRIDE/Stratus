@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stratus</title>
+<style>
+    body {
+        margin: 0;
+        background: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+    }
+    header {
+        background: #111;
+        padding: 20px;
+        text-align: center;
+        font-size: 32px;
+        font-weight: bold;
+        border-bottom: 2px solid #fff;
+    }
+    #tabs {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .tab {
+        padding: 10px 20px;
+        margin: 0 10px;
+        cursor: pointer;
+        border: 1px solid white;
+        border-radius: 5px;
+    }
+    .tab.active {
+        background: white;
+        color: black;
+        font-weight: bold;
+    }
+    .section {
+        display: none;
+        padding: 20px;
+        text-align: center;
+    }
+    .section.active {
+        display: block;
+    }
+    .item {
+        background: #111;
+        padding: 15px;
+        border: 1px solid white;
+        border-radius: 10px;
+        margin: 10px auto;
+        width: 80%;
+    }
+    button {
+        background: white;
+        color: black;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<header>STRATUS</header>
+
+<div id="tabs">
+    <div class="tab active" data-section="apps">Apps</div>
+    <div class="tab" data-section="games">Games</div>
+</div>
+
+<div id="apps" class="section active"></div>
+<div id="games" class="section"></div>
+
+<script>
+// TAB SWITCHING -----------------------------------------------------
+document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+        document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+        tab.classList.add("active");
+        document.getElementById(tab.dataset.section).classList.add("active");
+    });
+});
+
+// FETCH JSON --------------------------------------------------------
+const JSON_URL = "https://raw.githubusercontent.com/GLITCHED-OVERRIDE/Stratus/refs/heads/main/Apps.json";
+
+async function loadItems() {
+    const res = await fetch(JSON_URL);
+    const items = await res.json();
+
+    items.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `
+            <h2>${item.name}</h2>
+            <button onclick="installPWA('${item.url}', '${item.name}')">Install</button>
+        `;
+        if (item.type === "App") {
+            document.getElementById("apps").appendChild(div);
+        } else {
+            document.getElementById("games").appendChild(div);
+        }
+    });
+}
+loadItems();
+
+// ZIP FETCH + PWA INSTALLER -----------------------------------------
+async function installPWA(zipUrl, name) {
+    alert("Downloading " + name + " ...");
+
+    const res = await fetch(zipUrl);
+    const blob = await res.blob();
+
+    const zip = await JSZip.loadAsync(blob);
+    const files = {};
+
+    // Read ALL files inside ZIP
+    for (const filename of Object.keys(zip.files)) {
+        files[filename] = await zip.files[filename].async("string");
+    }
+
+    // Create isolated app folder using OPFS (browser storage)
+    const root = await navigator.storage.getDirectory();
+    const appFolder = await root.getDirectoryHandle(name, { create: true });
+
+    for (const filename of Object.keys(files)) {
+        const fileHandle = await appFolder.getFileHandle(filename, { create: true });
+        const writable = await fileHandle.createWritable();
+        await writable.write(files[filename]);
+        await writable.close();
+    }
+
+    // Create local URL to index.html inside OPFS
+    const indexFile = await appFolder.getFileHandle("index.html");
+    const file = await indexFile.getFile();
+    const appUrl = URL.createObjectURL(file);
+
+    // OPEN PWA INSTALL PROMPT
+    alert("PWA Ready! Now installing...");
+
+    window.location.href = appUrl;
+}
+
+// JSZIP LOADER -------------------------------------------------------
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+</body>
+</html>
