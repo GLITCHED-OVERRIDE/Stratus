@@ -35,77 +35,38 @@ async function loadApps() {
 loadApps();
 
 async function launchApp(app){
-    // Fetch ZIP
     const res = await fetch(app.url);
     const blob = await res.blob();
     const zip = await JSZip.loadAsync(blob);
 
     // Map filenames to blob URLs
-    const fileMap = {};
+    const blobMap = {};
     for(const filename of Object.keys(zip.files)){
-        const fBlob = await zip.files[filename].async("blob");
-        fileMap["/"+filename] = fBlob; // prepend / to mimic root
+        const fileBlob = await zip.files[filename].async("blob");
+        blobMap[filename] = URL.createObjectURL(fileBlob);
     }
 
-    // Register Service Worker for virtual file system
-    if('serviceWorker' in navigator){
-        const swBlob = new Blob([`
-        const files = ${JSON.stringify(Object.keys(fileMap))};
-        const fileBlobs = {};
-        self.addEventListener('install', e=>{
-            e.waitUntil((async ()=>{
-                for(const f of files){
-                    const resp = await fetch(f); // placeholder
-                    fileBlobs[f] = f; // will override in main
-                }
-            })());
-            self.skipWaiting();
-        });
-
-        self.addEventListener('fetch', e=>{
-            const url = new URL(e.request.url);
-            const pathname = url.pathname;
-            if(fileBlobs[pathname]){
-                e.respondWith(fetch(fileBlobs[pathname]));
-            }
-        });
-        `], {type:'application/javascript'});
-        const swUrl = URL.createObjectURL(swBlob);
-        try{ await navigator.serviceWorker.register(swUrl); }catch(e){console.log(e);}
-    }
-
-    // Open new window
-    const win = window.open("about:blank");
-    win.document.write("<!DOCTYPE html><html><head><title>"+app.name+"</title></head><body style='margin:0;background:#000;color:#fff;'><iframe id='appFrame' style='width:100%;height:100vh;border:none'></iframe></body></html>");
-
-    // Create iframe with virtual file protocol
-    const iframe = win.document.getElementById("appFrame");
-
-    // Build a Blob URL for index.html
-    const indexFileName = Object.keys(fileMap).find(f=>f.endsWith("index.html"));
-    if(!indexFileName){
-        win.document.body.innerHTML = "No index.html in ZIP";
+    // Rewrite index.html to point all assets to blob URLs
+    let indexName = Object.keys(zip.files).find(f=>f.toLowerCase().endsWith("index.html"));
+    if(!indexName){
+        alert("No index.html in ZIP");
         return;
     }
+    let indexContent = await zip.files[indexName].async("string");
 
-    const htmlBlob = new Blob([await zip.files[indexFileName].async("string")], {type:"text/html"});
-    const htmlUrl = URL.createObjectURL(htmlBlob);
-    iframe.src = htmlUrl;
+    // Replace all file references in HTML with blob URLs
+    Object.keys(blobMap).forEach(f=>{
+        const escapedName = f.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); // escape regex
+        const regex = new RegExp(escapedName,"g");
+        indexContent = indexContent.replace(regex, blobMap[f]);
+    });
 
-    // Override asset requests inside iframe
-    iframe.onload = () => {
-        const iframeWin = iframe.contentWindow;
-        const originalFetch = iframeWin.fetch;
-        iframeWin.fetch = async (input, init) => {
-            let path = typeof input === "string" ? input : input.url;
-            let key = Object.keys(fileMap).find(k => path.endsWith(k));
-            if(key){
-                const b = fileMap[key];
-                return new Response(b);
-            }
-            return originalFetch(input, init);
-        };
-    };
+    // Create new Blob URL for rewritten HTML
+    const indexBlob = new Blob([indexContent], {type:'text/html'});
+    const indexURL = URL.createObjectURL(indexBlob);
+
+    // Open in new window
+    const win = window.open(indexURL, "_blank");
 }
 </script>
 
