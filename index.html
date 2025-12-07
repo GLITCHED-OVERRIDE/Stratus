@@ -5,23 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Stratus</title>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
 <style>
     body {
         margin: 0;
         background: #000;
         color: #fff;
         font-family: Arial, sans-serif;
-        padding-top: 75px; /* space for the top bar */
+        padding-top: 75px;
     }
 
-    /* --- TOP HEADER / BLOB --- */
+    /* Top Blob */
     header {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         height: 70px;
-        background: #111;
+        background: linear-gradient(to right, #111, #000);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -30,13 +32,13 @@
         z-index: 1000;
     }
 
-    header .title {
+    .title {
         font-size: 26px;
         font-weight: bold;
     }
 
-    /* --- Install button in the top bar --- */
-    #installButton {
+    /* Top Download Button */
+    #downloadStratus {
         background: white;
         color: black;
         border: none;
@@ -53,6 +55,7 @@
         justify-content: center;
         margin-top: 15px;
     }
+
     .tab {
         padding: 10px 15px;
         margin: 0 8px;
@@ -60,6 +63,7 @@
         border: 1px solid white;
         border-radius: 5px;
     }
+
     .tab.active {
         background: white;
         color: black;
@@ -71,11 +75,11 @@
         text-align: center;
         padding: 20px;
     }
+
     .section.active {
         display: block;
     }
 
-    /* Each list item */
     .item {
         background: #111;
         padding: 15px;
@@ -85,20 +89,15 @@
         width: 85%;
         cursor: pointer;
     }
-
-    .item.selected {
-        border-color: #0ff;
-        box-shadow: 0 0 15px #0ff;
-    }
 </style>
 </head>
-
 <body>
 
-<!-- TOP HEADER WITH INSTALL BUTTON -->
 <header>
     <div class="title">STRATUS</div>
-    <button id="installButton">Install Selected</button>
+
+    <!-- THE BUTTON YOU WANT -->
+    <button id="downloadStratus">Download Platform</button>
 </header>
 
 <div id="tabs">
@@ -109,12 +108,13 @@
 <div id="apps" class="section active"></div>
 <div id="games" class="section"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-
 <script>
-let selectedItem = null;
+const JSON_URL =
+"https://raw.githubusercontent.com/GLITCHED-OVERRIDE/Stratus/refs/heads/main/Apps.json";
 
-/* -------- TAB SWITCHING -------- */
+let allItems = [];
+
+/* Tabs */
 document.querySelectorAll(".tab").forEach(tab => {
     tab.addEventListener("click", () => {
         document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
@@ -125,71 +125,68 @@ document.querySelectorAll(".tab").forEach(tab => {
     });
 });
 
-/* -------- LOAD JSON LIST -------- */
-const JSON_URL = "https://raw.githubusercontent.com/GLITCHED-OVERRIDE/Stratus/refs/heads/main/Apps.json";
-
+/* Load Apps/Games */
 async function loadItems() {
     const res = await fetch(JSON_URL);
     const items = await res.json();
+    allItems = items;
 
     items.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "item";
-        div.textContent = item.name;
-
-        div.addEventListener("click", () => {
-            document.querySelectorAll(".item").forEach(x => x.classList.remove("selected"));
-            div.classList.add("selected");
-            selectedItem = item;
-        });
+        const box = document.createElement("div");
+        box.className = "item";
+        box.textContent = item.name;
 
         if (item.type === "App") {
-            document.getElementById("apps").appendChild(div);
+            document.getElementById("apps").appendChild(box);
         } else {
-            document.getElementById("games").appendChild(div);
+            document.getElementById("games").appendChild(box);
         }
     });
 }
 loadItems();
 
-/* -------- INSTALLATION BUTTON -------- */
-document.getElementById("installButton").addEventListener("click", async () => {
-    if (!selectedItem) {
-        alert("Select an app or game first.");
-        return;
+/* DOWNLOAD PLATFORM BUTTON */
+document.getElementById("downloadStratus").addEventListener("click", async () => {
+
+    const zip = new JSZip();
+
+    // Add manifest.json for Stratus PWA
+    zip.file("manifest.json", JSON.stringify({
+        name: "Stratus",
+        short_name: "Stratus",
+        start_url: "/index.html",
+        display: "standalone",
+        background_color: "#000000",
+        theme_color: "#ffffff",
+        icons: []
+    }, null, 2));
+
+    // Add each app/game ZIP contents
+    for (const item of allItems) {
+        const appFolder = zip.folder(item.name);
+
+        const res = await fetch(item.url);
+        const blob = await res.blob();
+        const appZip = await JSZip.loadAsync(blob);
+
+        for (const filename of Object.keys(appZip.files)) {
+            const data = await appZip.files[filename].async("uint8array");
+            appFolder.file(filename, data);
+        }
     }
 
-    const { name, url } = selectedItem;
+    // Build the ZIP
+    const finalBlob = await zip.generateAsync({ type: "blob" });
+    const url = URL.createObjectURL(finalBlob);
 
-    alert("Downloading " + name + "...");
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Stratus.zip";
+    a.click();
 
-    const res = await fetch(url);
-    const blob = await res.blob();
-    const zip = await JSZip.loadAsync(blob);
-
-    const files = {};
-
-    for (const filename of Object.keys(zip.files)) {
-        files[filename] = await zip.files[filename].async("string");
-    }
-
-    const root = await navigator.storage.getDirectory();
-    const appFolder = await root.getDirectoryHandle(name, { create: true });
-
-    for (const filename of Object.keys(files)) {
-        const fh = await appFolder.getFileHandle(filename, { create: true });
-        const writable = await fh.createWritable();
-        await writable.write(files[filename]);
-        await writable.close();
-    }
-
-    const indexFile = await appFolder.getFileHandle("index.html");
-    const file = await indexFile.getFile();
-    const url2 = URL.createObjectURL(file);
-
-    alert("Opening launcher...");
-    window.location.href = url2;
+    URL.revokeObjectURL(url);
 });
 </script>
+
 </body>
 </html>
