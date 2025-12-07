@@ -4,29 +4,40 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Stratus</title>
+
 <style>
     body {
         margin: 0;
         background: #000;
         color: #fff;
         font-family: Arial, sans-serif;
+        padding-top: 70px; /* room for header */
     }
+
+    /* Fixed top header */
     header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
         background: #111;
-        padding: 20px;
+        padding: 15px 10px;
+        font-size: 26px;
         text-align: center;
-        font-size: 32px;
         font-weight: bold;
         border-bottom: 2px solid #fff;
+        z-index: 1000;
     }
+
+    /* Tabs */
     #tabs {
         display: flex;
         justify-content: center;
-        margin-top: 20px;
+        margin-top: 10px;
     }
     .tab {
-        padding: 10px 20px;
-        margin: 0 10px;
+        padding: 10px 15px;
+        margin: 0 8px;
         cursor: pointer;
         border: 1px solid white;
         border-radius: 5px;
@@ -36,6 +47,7 @@
         color: black;
         font-weight: bold;
     }
+
     .section {
         display: none;
         padding: 20px;
@@ -44,27 +56,43 @@
     .section.active {
         display: block;
     }
+
+    /* Each Game/App Card */
     .item {
         background: #111;
         padding: 15px;
         border: 1px solid white;
         border-radius: 10px;
-        margin: 10px auto;
-        width: 80%;
+        margin: 15px auto;
+        width: 85%;
+        position: relative;
     }
-    button {
+
+    /* Floating install button at top of each card */
+    .install-button {
+        position: absolute;
+        top: -15px;
+        right: -10px;
         background: white;
         color: black;
-        border: none;
-        padding: 10px 20px;
-        margin-top: 10px;
-        border-radius: 5px;
-        cursor: pointer;
+        padding: 10px 15px;
+        font-size: 14px;
         font-weight: bold;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0px 0px 10px #000;
     }
+
+    h2 {
+        margin-top: 25px;
+    }
+
 </style>
 </head>
+
 <body>
+
 <header>STRATUS</header>
 
 <div id="tabs">
@@ -75,8 +103,10 @@
 <div id="apps" class="section active"></div>
 <div id="games" class="section"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
 <script>
-// TAB SWITCHING -----------------------------------------------------
+// TAB SWITCHING
 document.querySelectorAll(".tab").forEach(tab => {
     tab.addEventListener("click", () => {
         document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
@@ -86,9 +116,10 @@ document.querySelectorAll(".tab").forEach(tab => {
     });
 });
 
-// FETCH JSON --------------------------------------------------------
+// JSON SOURCE
 const JSON_URL = "https://raw.githubusercontent.com/GLITCHED-OVERRIDE/Stratus/refs/heads/main/Apps.json";
 
+// LOAD ITEMS
 async function loadItems() {
     const res = await fetch(JSON_URL);
     const items = await res.json();
@@ -97,9 +128,10 @@ async function loadItems() {
         const div = document.createElement("div");
         div.className = "item";
         div.innerHTML = `
+            <button class="install-button" onclick="installPWA('${item.url}', '${item.name}')">Install</button>
             <h2>${item.name}</h2>
-            <button onclick="installPWA('${item.url}', '${item.name}')">Install</button>
         `;
+
         if (item.type === "App") {
             document.getElementById("apps").appendChild(div);
         } else {
@@ -109,46 +141,38 @@ async function loadItems() {
 }
 loadItems();
 
-// ZIP FETCH + PWA INSTALLER -----------------------------------------
+// INSTALLER LOGIC
 async function installPWA(zipUrl, name) {
-    alert("Downloading " + name + " ...");
+    alert("Downloading " + name + "...");
 
     const res = await fetch(zipUrl);
     const blob = await res.blob();
-
     const zip = await JSZip.loadAsync(blob);
+
     const files = {};
 
-    // Read ALL files inside ZIP
     for (const filename of Object.keys(zip.files)) {
         files[filename] = await zip.files[filename].async("string");
     }
 
-    // Create isolated app folder using OPFS (browser storage)
     const root = await navigator.storage.getDirectory();
     const appFolder = await root.getDirectoryHandle(name, { create: true });
 
     for (const filename of Object.keys(files)) {
-        const fileHandle = await appFolder.getFileHandle(filename, { create: true });
-        const writable = await fileHandle.createWritable();
+        const fh = await appFolder.getFileHandle(filename, { create: true });
+        const writable = await fh.createWritable();
         await writable.write(files[filename]);
         await writable.close();
     }
 
-    // Create local URL to index.html inside OPFS
     const indexFile = await appFolder.getFileHandle("index.html");
     const file = await indexFile.getFile();
-    const appUrl = URL.createObjectURL(file);
+    const url = URL.createObjectURL(file);
 
-    // OPEN PWA INSTALL PROMPT
-    alert("PWA Ready! Now installing...");
-
-    window.location.href = appUrl;
+    alert("Opening launcher...");
+    window.location.href = url;
 }
-
-// JSZIP LOADER -------------------------------------------------------
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
 </body>
 </html>
