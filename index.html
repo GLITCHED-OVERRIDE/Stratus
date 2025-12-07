@@ -11,29 +11,47 @@
         background: #000;
         color: #fff;
         font-family: Arial, sans-serif;
-        padding-top: 70px; /* room for header */
+        padding-top: 75px; /* space for the top bar */
     }
 
-    /* Fixed top header */
+    /* --- TOP HEADER / BLOB --- */
     header {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
+        height: 70px;
         background: #111;
-        padding: 15px 10px;
-        font-size: 26px;
-        text-align: center;
-        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 15px;
         border-bottom: 2px solid #fff;
         z-index: 1000;
+    }
+
+    header .title {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    /* --- Install button in the top bar --- */
+    #installButton {
+        background: white;
+        color: black;
+        border: none;
+        padding: 10px 20px;
+        font-size: 15px;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
     }
 
     /* Tabs */
     #tabs {
         display: flex;
         justify-content: center;
-        margin-top: 10px;
+        margin-top: 15px;
     }
     .tab {
         padding: 10px 15px;
@@ -50,14 +68,14 @@
 
     .section {
         display: none;
-        padding: 20px;
         text-align: center;
+        padding: 20px;
     }
     .section.active {
         display: block;
     }
 
-    /* Each Game/App Card */
+    /* Each list item */
     .item {
         background: #111;
         padding: 15px;
@@ -65,35 +83,23 @@
         border-radius: 10px;
         margin: 15px auto;
         width: 85%;
-        position: relative;
-    }
-
-    /* Floating install button at top of each card */
-    .install-button {
-        position: absolute;
-        top: -15px;
-        right: -10px;
-        background: white;
-        color: black;
-        padding: 10px 15px;
-        font-size: 14px;
-        font-weight: bold;
-        border-radius: 8px;
-        border: none;
         cursor: pointer;
-        box-shadow: 0px 0px 10px #000;
     }
 
-    h2 {
-        margin-top: 25px;
+    .item.selected {
+        border-color: #0ff;
+        box-shadow: 0 0 15px #0ff;
     }
-
 </style>
 </head>
 
 <body>
 
-<header>STRATUS</header>
+<!-- TOP HEADER WITH INSTALL BUTTON -->
+<header>
+    <div class="title">STRATUS</div>
+    <button id="installButton">Install Selected</button>
+</header>
 
 <div id="tabs">
     <div class="tab active" data-section="apps">Apps</div>
@@ -106,20 +112,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
 <script>
-// TAB SWITCHING
+let selectedItem = null;
+
+/* -------- TAB SWITCHING -------- */
 document.querySelectorAll(".tab").forEach(tab => {
     tab.addEventListener("click", () => {
         document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-        document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
         tab.classList.add("active");
+
+        document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
         document.getElementById(tab.dataset.section).classList.add("active");
     });
 });
 
-// JSON SOURCE
+/* -------- LOAD JSON LIST -------- */
 const JSON_URL = "https://raw.githubusercontent.com/GLITCHED-OVERRIDE/Stratus/refs/heads/main/Apps.json";
 
-// LOAD ITEMS
 async function loadItems() {
     const res = await fetch(JSON_URL);
     const items = await res.json();
@@ -127,10 +135,13 @@ async function loadItems() {
     items.forEach(item => {
         const div = document.createElement("div");
         div.className = "item";
-        div.innerHTML = `
-            <button class="install-button" onclick="installPWA('${item.url}', '${item.name}')">Install</button>
-            <h2>${item.name}</h2>
-        `;
+        div.textContent = item.name;
+
+        div.addEventListener("click", () => {
+            document.querySelectorAll(".item").forEach(x => x.classList.remove("selected"));
+            div.classList.add("selected");
+            selectedItem = item;
+        });
 
         if (item.type === "App") {
             document.getElementById("apps").appendChild(div);
@@ -141,11 +152,18 @@ async function loadItems() {
 }
 loadItems();
 
-// INSTALLER LOGIC
-async function installPWA(zipUrl, name) {
+/* -------- INSTALLATION BUTTON -------- */
+document.getElementById("installButton").addEventListener("click", async () => {
+    if (!selectedItem) {
+        alert("Select an app or game first.");
+        return;
+    }
+
+    const { name, url } = selectedItem;
+
     alert("Downloading " + name + "...");
 
-    const res = await fetch(zipUrl);
+    const res = await fetch(url);
     const blob = await res.blob();
     const zip = await JSZip.loadAsync(blob);
 
@@ -167,12 +185,11 @@ async function installPWA(zipUrl, name) {
 
     const indexFile = await appFolder.getFileHandle("index.html");
     const file = await indexFile.getFile();
-    const url = URL.createObjectURL(file);
+    const url2 = URL.createObjectURL(file);
 
     alert("Opening launcher...");
-    window.location.href = url;
-}
+    window.location.href = url2;
+});
 </script>
-
 </body>
 </html>
