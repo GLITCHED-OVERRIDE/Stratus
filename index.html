@@ -1,103 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Stratus</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stratus Launcher</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-
 <style>
-    body {
-        margin: 0;
-        background: #000;
-        color: #fff;
-        font-family: Arial, sans-serif;
-        padding-top: 75px;
-    }
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: #000;
+    color: #fff;
+    padding-top: 70px;
+}
 
-    /* Top Blob */
-    header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 70px;
-        background: linear-gradient(to right, #111, #000);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 15px;
-        border-bottom: 2px solid #fff;
-        z-index: 1000;
-    }
+header {
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    height: 70px;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    border-bottom: 2px solid #fff;
+    z-index: 1000;
+}
 
-    .title {
-        font-size: 26px;
-        font-weight: bold;
-    }
+header .title {
+    font-size: 24px;
+    font-weight: bold;
+}
 
-    /* Top Download Button */
-    #downloadStratus {
-        background: white;
-        color: black;
-        border: none;
-        padding: 10px 20px;
-        font-size: 15px;
-        font-weight: bold;
-        border-radius: 8px;
-        cursor: pointer;
-    }
+#showZip {
+    background: white;
+    color: black;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
-    /* Tabs */
-    #tabs {
-        display: flex;
-        justify-content: center;
-        margin-top: 15px;
-    }
+#tabs {
+    display:flex;
+    justify-content:center;
+    margin-top: 15px;
+}
 
-    .tab {
-        padding: 10px 15px;
-        margin: 0 8px;
-        cursor: pointer;
-        border: 1px solid white;
-        border-radius: 5px;
-    }
+.tab {
+    padding: 10px 15px;
+    margin:0 8px;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-    .tab.active {
-        background: white;
-        color: black;
-        font-weight: bold;
-    }
+.tab.active {
+    background:white;
+    color:black;
+    font-weight:bold;
+}
 
-    .section {
-        display: none;
-        text-align: center;
-        padding: 20px;
-    }
+.section {
+    display:none;
+    padding:20px;
+    text-align:center;
+}
 
-    .section.active {
-        display: block;
-    }
+.section.active {
+    display:block;
+}
 
-    .item {
-        background: #111;
-        padding: 15px;
-        border: 1px solid white;
-        border-radius: 10px;
-        margin: 15px auto;
-        width: 85%;
-        cursor: pointer;
-    }
+.item {
+    background:#111;
+    padding:15px;
+    border:1px solid white;
+    border-radius:10px;
+    margin:15px auto;
+    width:85%;
+    cursor:pointer;
+}
+
+#launcher {
+    display:none;
+    padding:20px;
+}
+
+#fileBrowser {
+    background:#222;
+    color:#0ff;
+    padding:15px;
+    margin-top:10px;
+    max-height:400px;
+    overflow:auto;
+    border:1px solid #0ff;
+    font-family:monospace;
+}
 </style>
 </head>
 <body>
 
 <header>
     <div class="title">STRATUS</div>
-
-    <!-- THE BUTTON YOU WANT -->
-    <button id="downloadStratus">Download Platform</button>
+    <button id="showZip">Show ZIP Contents</button>
 </header>
 
 <div id="tabs">
@@ -108,83 +115,87 @@
 <div id="apps" class="section active"></div>
 <div id="games" class="section"></div>
 
+<div id="launcher">
+    <h2 id="launcherTitle"></h2>
+    <iframe id="launcherFrame" style="width:100%;height:600px;border:none;"></iframe>
+    <div id="fileBrowser"></div>
+</div>
+
 <script>
-const JSON_URL =
-"https://raw.githubusercontent.com/GLITCHED-OVERRIDE/Stratus/refs/heads/main/Apps.json";
-
 let allItems = [];
+let currentZip = null;
 
-/* Tabs */
-document.querySelectorAll(".tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-        tab.classList.add("active");
+const JSON_URL = "https://raw.githubusercontent.com/GLITCHED-OVERRIDE/Stratus/refs/heads/main/Apps.json";
 
-        document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-        document.getElementById(tab.dataset.section).classList.add("active");
-    });
-});
-
-/* Load Apps/Games */
-async function loadItems() {
+async function loadItems(){
     const res = await fetch(JSON_URL);
     const items = await res.json();
     allItems = items;
 
-    items.forEach(item => {
-        const box = document.createElement("div");
-        box.className = "item";
-        box.textContent = item.name;
-
-        if (item.type === "App") {
-            document.getElementById("apps").appendChild(box);
+    items.forEach(item=>{
+        const div = document.createElement("div");
+        div.className = "item";
+        div.textContent = item.name;
+        div.addEventListener("click",()=>launchApp(item));
+        if(item.type==="App"){
+            document.getElementById("apps").appendChild(div);
         } else {
-            document.getElementById("games").appendChild(box);
+            document.getElementById("games").appendChild(div);
         }
     });
 }
+
 loadItems();
 
-/* DOWNLOAD PLATFORM BUTTON */
-document.getElementById("downloadStratus").addEventListener("click", async () => {
+/* Tabs */
+document.querySelectorAll(".tab").forEach(tab=>{
+    tab.addEventListener("click",()=>{
+        document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+        tab.classList.add("active");
 
-    const zip = new JSZip();
+        document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+        document.getElementById(tab.dataset.section).classList.add("active");
+    });
+});
 
-    // Add manifest.json for Stratus PWA
-    zip.file("manifest.json", JSON.stringify({
-        name: "Stratus",
-        short_name: "Stratus",
-        start_url: "/index.html",
-        display: "standalone",
-        background_color: "#000000",
-        theme_color: "#ffffff",
-        icons: []
-    }, null, 2));
+async function launchApp(item){
+    const res = await fetch(item.url);
+    const blob = await res.blob();
+    const zip = await JSZip.loadAsync(blob);
+    currentZip = zip;
 
-    // Add each app/game ZIP contents
-    for (const item of allItems) {
-        const appFolder = zip.folder(item.name);
-
-        const res = await fetch(item.url);
-        const blob = await res.blob();
-        const appZip = await JSZip.loadAsync(blob);
-
-        for (const filename of Object.keys(appZip.files)) {
-            const data = await appZip.files[filename].async("uint8array");
-            appFolder.file(filename, data);
-        }
+    // Extract files to blob urls
+    const fileMap = {};
+    for(const filename of Object.keys(zip.files)){
+        const fileBlob = await zip.files[filename].async("blob");
+        fileMap[filename] = URL.createObjectURL(fileBlob);
     }
 
-    // Build the ZIP
-    const finalBlob = await zip.generateAsync({ type: "blob" });
-    const url = URL.createObjectURL(finalBlob);
+    // Load index.html inside iframe
+    let indexFile = Object.keys(fileMap).find(f=>f.endsWith("index.html"));
+    if(!indexFile){
+        alert("No index.html found in ZIP!");
+        return;
+    }
 
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "Stratus.zip";
-    a.click();
+    document.getElementById("launcherTitle").textContent = item.name;
+    const iframe = document.getElementById("launcherFrame");
+    iframe.src = fileMap[indexFile];
 
-    URL.revokeObjectURL(url);
+    document.getElementById("launcher").style.display = "block";
+}
+
+/* Show ZIP contents */
+document.getElementById("showZip").addEventListener("click",()=>{
+    if(!currentZip){
+        alert("No app loaded!");
+        return;
+    }
+    const fb = document.getElementById("fileBrowser");
+    fb.innerHTML = "<strong>ZIP Contents:</strong><br>";
+    Object.keys(currentZip.files).forEach(f=>{
+        fb.innerHTML += f+"<br>";
+    });
 });
 </script>
 
