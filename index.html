@@ -4,213 +4,89 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stratus Launcher</title>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-
 <style>
-body {
-    margin:0;
-    font-family: Arial, sans-serif;
-    background: #000;
-    color: #fff;
-    padding-top: 70px;
-}
-
-header {
-    position: fixed;
-    top:0;
-    left:0;
-    right:0;
-    height: 70px;
-    background: #111;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 15px;
-    border-bottom: 2px solid #fff;
-    z-index: 1000;
-}
-
-header .title {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-#installPWA {
-    background: white;
-    color: black;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-#tabs {
-    display:flex;
-    justify-content:center;
-    margin-top: 15px;
-}
-
-.tab {
-    padding: 10px 15px;
-    margin:0 8px;
-    border: 1px solid white;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.tab.active {
-    background:white;
-    color:black;
-    font-weight:bold;
-}
-
-.section {
-    display:none;
-    padding:20px;
-    text-align:center;
-}
-
-.section.active {
-    display:block;
-}
-
-.item {
-    background:#111;
-    padding:15px;
-    border:1px solid white;
-    border-radius:10px;
-    margin:15px auto;
-    width:85%;
-    cursor:pointer;
-}
-
-#launcher {
-    display:none;
-    padding:20px;
-}
-
-#launcher iframe {
-    width:100%;
-    height:600px;
-    border:none;
-}
+body { background:#000; color:#fff; font-family:Arial; padding:70px 20px 20px 20px; }
+.item { background:#111; padding:15px; margin:15px auto; width:85%; cursor:pointer; border:1px solid #fff; border-radius:10px; text-align:center; }
 </style>
 </head>
 <body>
 
-<header>
-    <div class="title" id="launcherTitle">STRATUS</div>
-    <button id="installPWA" style="display:none;">Install App</button>
-</header>
-
-<div id="tabs">
-    <div class="tab active" data-section="apps">Apps</div>
-    <div class="tab" data-section="games">Games</div>
-</div>
-
-<div id="apps" class="section active"></div>
-<div id="games" class="section"></div>
-
-<div id="launcher">
-    <iframe id="launcherFrame"></iframe>
-</div>
+<h1>Stratus Launcher</h1>
+<div id="apps"></div>
 
 <script>
-let allItems = [];
-let currentAppZip = null;
-let deferredPrompt = null;
-
-// Load JSON of apps/games
 const JSON_URL = "https://raw.githubusercontent.com/GLITCHED-OVERRIDE/Stratus/refs/heads/main/Apps.json";
-async function loadItems(){
-    const res = await fetch(JSON_URL);
-    const items = await res.json();
-    allItems = items;
 
-    items.forEach(item=>{
+async function loadApps() {
+    const res = await fetch(JSON_URL);
+    const apps = await res.json();
+    const container = document.getElementById("apps");
+
+    apps.forEach(app=>{
         const div = document.createElement("div");
         div.className = "item";
-        div.textContent = item.name;
-        div.addEventListener("click",()=>launchApp(item));
-        if(item.type==="App"){
-            document.getElementById("apps").appendChild(div);
-        } else {
-            document.getElementById("games").appendChild(div);
-        }
+        div.textContent = app.name;
+        div.addEventListener("click",()=>launchApp(app));
+        container.appendChild(div);
     });
 }
-loadItems();
 
-// Tab switching
-document.querySelectorAll(".tab").forEach(tab=>{
-    tab.addEventListener("click",()=>{
-        document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-        tab.classList.add("active");
+loadApps();
 
-        document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-        document.getElementById(tab.dataset.section).classList.add("active");
-    });
-});
-
-// PWA install prompt listener
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-});
-
-// Launch app/game
-async function launchApp(item){
-    const res = await fetch(item.url);
+async function launchApp(app) {
+    // Fetch ZIP
+    const res = await fetch(app.url);
     const blob = await res.blob();
     const zip = await JSZip.loadAsync(blob);
-    currentAppZip = zip;
 
-    // Find index.html
-    const indexFileName = Object.keys(zip.files).find(f=>f.endsWith("index.html"));
+    // Open new window
+    const win = window.open("about:blank");
+    win.document.write('<!DOCTYPE html><html><head><title>'+app.name+'</title></head><body style="margin:0;background:#000;color:#fff;"><div id="header" style="position:fixed;top:0;width:100%;height:60px;background:#111;display:flex;align-items:center;justify-content:space-between;padding:0 15px;z-index:1000;"><span style="font-weight:bold;font-size:20px;">'+app.name+'</span><button id="installBtn" style="padding:8px 15px;">Install PWA</button></div><div id="content" style="margin-top:60px;"></div></body></html>');
+
+    const fileMap = {};
+
+    // Create blob URLs for all files
+    for(const filename of Object.keys(zip.files)){
+        const fileBlob = await zip.files[filename].async("blob");
+        fileMap[filename] = URL.createObjectURL(fileBlob);
+    }
+
+    // Load index.html
+    const indexFileName = Object.keys(fileMap).find(f=>f.endsWith("index.html"));
     if(!indexFileName){
-        alert("No index.html in ZIP");
+        win.document.getElementById("content").innerHTML = "No index.html found in ZIP";
         return;
     }
 
-    const indexBlob = await zip.files[indexFileName].async("blob");
-    const indexUrl = URL.createObjectURL(indexBlob);
+    const iframe = win.document.createElement("iframe");
+    iframe.style.width = "100%";
+    iframe.style.height = "90vh";
+    iframe.style.border = "none";
 
-    document.getElementById("launcherFrame").src = indexUrl;
-    document.getElementById("launcher").style.display = "block";
-    document.getElementById("launcherTitle").textContent = item.name;
+    iframe.src = fileMap[indexFileName];
+    win.document.getElementById("content").appendChild(iframe);
 
-    // Fetch manifest.json from ZIP if exists
-    const manifestFileName = Object.keys(zip.files).find(f=>f.endsWith("manifest.json"));
-    if(manifestFileName){
-        const manifestBlob = await zip.files[manifestFileName].async("blob");
-        const manifestURL = URL.createObjectURL(manifestBlob);
+    // Optionally setup PWA install prompt
+    let deferredPrompt = null;
+    win.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+    });
 
-        let linkTag = document.querySelector('link[rel="manifest"]');
-        if(linkTag) linkTag.href = manifestURL;
-        else {
-            linkTag = document.createElement("link");
-            linkTag.rel = "manifest";
-            linkTag.href = manifestURL;
-            document.head.appendChild(linkTag);
+    const installBtn = win.document.getElementById("installBtn");
+    installBtn.addEventListener("click", async ()=>{
+        if(deferredPrompt){
+            deferredPrompt.prompt();
+            const choice = await deferredPrompt.userChoice;
+            if(choice.outcome === 'accepted') console.log('App installed');
+            deferredPrompt = null;
+        } else {
+            alert("Install prompt not available.");
         }
-        document.getElementById("installPWA").style.display = "inline-block";
-    }
+    });
 }
-
-// Install button triggers browser prompt
-document.getElementById("installPWA").addEventListener("click", async ()=>{
-    if(deferredPrompt){
-        deferredPrompt.prompt();
-        const choiceResult = await deferredPrompt.userChoice;
-        if(choiceResult.outcome === 'accepted'){
-            console.log('User accepted the install prompt');
-        }
-        deferredPrompt = null;
-    } else {
-        alert("Install prompt not available. Open this page in a supported browser or reload.");
-    }
-});
 </script>
+
 </body>
 </html>
