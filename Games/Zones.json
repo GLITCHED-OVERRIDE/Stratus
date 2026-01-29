@@ -3,5 +3,10 @@
     "name": "Pixel Shooter",
     "cover": "Games/Files/Pixel Shooter/index.png",
     "url": "/Games/Files/Pixel Shooter/index.html"
+  },
+  {
+    "name": "Crossy Road",
+    "cover": "/Games/Files/Crossy Road/index.png",
+    "url": "/Games/Files/Crossy Road/index.html"
   }
 ]
