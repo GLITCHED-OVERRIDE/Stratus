@@ -6,18 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-  :root {
-    --bg:#070707;
-    --panel:#111;
-    --accent:#d22;
-    --text:#eee;
-  }
-
   html,body{
     margin:0;
     height:100%;
-    background:var(--bg);
-    color:var(--text);
+    background:#070707;
+    color:#eee;
     font-family:system-ui,sans-serif;
   }
 
@@ -28,9 +21,9 @@
   }
 
   #games{
-    background:var(--panel);
-    overflow-y:auto;
+    background:#111;
     padding:12px;
+    overflow-y:auto;
   }
 
   .game{
@@ -41,14 +34,13 @@
     overflow:hidden;
   }
 
-  .game:hover{border-color:var(--accent);}
-
+  .game:hover{border-color:#d22;}
   .game img{width:100%;display:block;}
+
   .title{
-    text-align:center;
     padding:8px;
+    text-align:center;
     background:#0b0b0b;
-    font-size:14px;
   }
 
   #player{
@@ -72,8 +64,6 @@
     padding:6px 10px;
     cursor:pointer;
   }
-
-  #toolbar button:hover{border-color:var(--accent);}
 
   iframe{
     width:100%;
@@ -103,7 +93,7 @@
     </div>
 
     <div id="placeholder">Select a game</div>
-    <iframe id="outerFrame"></iframe>
+    <iframe id="frame" src="about:blank"></iframe>
   </div>
 </div>
 
@@ -111,85 +101,47 @@
 const GAMES_JSON = "/Games/Zones.json";
 
 const gamesEl = document.getElementById("games");
-const outerFrame = document.getElementById("outerFrame");
+const frame = document.getElementById("frame");
 const placeholder = document.getElementById("placeholder");
 
-let currentGameURL = null;
+let currentURL = null;
 
-/* Load game list */
+/* Load games */
 fetch(GAMES_JSON)
   .then(r => r.json())
   .then(games => {
-    games.forEach(game => {
-      const card = document.createElement("div");
-      card.className = "game";
-
-      card.innerHTML = `
-        <img src="${game.cover}">
-        <div class="title">${game.name}</div>
+    games.forEach(g => {
+      const el = document.createElement("div");
+      el.className = "game";
+      el.innerHTML = `
+        <img src="${g.cover}">
+        <div class="title">${g.name}</div>
       `;
-
-      card.onclick = () => loadGame(game.url);
-      gamesEl.appendChild(card);
+      el.onclick = () => loadGame(g.url);
+      gamesEl.appendChild(el);
     });
   });
 
-/* Load game into about:blank -> iframe */
+/* Navigate about:blank to game */
 function loadGame(url){
-  currentGameURL = url;
+  currentURL = url;
   placeholder.style.display = "none";
-
-  outerFrame.src = "about:blank";
-  outerFrame.onload = () => {
-    const doc = outerFrame.contentDocument;
-    doc.open();
-    doc.write(`
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<style>
-  html,body{margin:0;height:100%;background:black;}
-  iframe{width:100%;height:100%;border:none;}
-</style>
-</head>
-<body>
-  <iframe src="${url}" allowfullscreen></iframe>
-</body>
-</html>
-    `);
-    doc.close();
+  frame.src = "about:blank";
+  frame.onload = () => {
+    frame.contentWindow.location.replace(url);
   };
 }
 
 /* Fullscreen */
 document.getElementById("fullscreenBtn").onclick = () => {
-  const el = document.getElementById("player");
-  if (el.requestFullscreen) el.requestFullscreen();
+  document.getElementById("player").requestFullscreen();
 };
 
-/* Open about:blank in new tab */
+/* Open in new tab */
 document.getElementById("popoutBtn").onclick = () => {
-  if (!currentGameURL) return;
-
+  if (!currentURL) return;
   const win = window.open("about:blank", "_blank");
-  win.document.write(`
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Game</title>
-<style>
-  html,body{margin:0;height:100%;background:black;}
-  iframe{width:100%;height:100%;border:none;}
-</style>
-</head>
-<body>
-  <iframe src="${currentGameURL}" allowfullscreen></iframe>
-</body>
-</html>
-  `);
-  win.document.close();
+  win.location.replace(currentURL);
 };
 </script>
 
