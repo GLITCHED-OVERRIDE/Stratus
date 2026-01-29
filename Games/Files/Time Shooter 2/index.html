@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Time Shooter 2</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style type="text/css">
+    #button {
+      display: none;
+    }
+
+    .imgb_vis {
+      animation: imgb-animation 7s linear;
+    }
+
+    @keyframes imgb-animation {
+      10% { transform: translateX(0); }
+      20% { transform: translateX(100px); }
+      90% { transform: translateX(100px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="unity-desktop" id="unity-container">
+    <canvas
+      id="unity-canvas"
+      style="background: url('ts2.jpg') center center / cover;">
+    </canvas>
+  </div>
+
+  <div id="loading-cover">
+    <div id="unity-loading-bar">
+      <div id="unity-logo">
+        <img src="logo.png" alt="Logo">
+      </div>
+      <div id="unity-progress-bar-empty">
+        <div id="unity-progress-bar-full" style="width: 0%;"></div>
+      </div>
+      <div class="spinner" style="display: none;"></div>
+    </div>
+  </div>
+
+  <div id="unity-fullscreen-button" style="display: none;"></div>
+
+  <script>
+    const hideFullScreenButton = "1";
+    const buildUrl = ".";
+    const loaderUrl = buildUrl + "/ts2.loader.js";
+
+    const config = {
+      dataUrl: buildUrl + "/ts2.data",
+      frameworkUrl: buildUrl + "/ts2.framework.js",
+      codeUrl: buildUrl + "/ts2.wasm",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "GoGoMan",
+      productName: "Time Shooter 2",
+      productVersion: "0.1"
+    };
+
+    const container = document.querySelector("#unity-container");
+    const canvas = document.querySelector("#unity-canvas");
+    const loadingCover = document.querySelector("#loading-cover");
+    const progressBarEmpty = document.querySelector("#unity-progress-bar-empty");
+    const progressBarFull = document.querySelector("#unity-progress-bar-full");
+    const fullscreenButton = document.querySelector("#unity-fullscreen-button");
+    const spinner = document.querySelector(".spinner");
+
+    const canFullscreen = (() => {
+      return [
+        "exitFullscreen",
+        "webkitExitFullscreen",
+        "webkitCancelFullScreen",
+        "mozCancelFullScreen",
+        "msExitFullscreen"
+      ].some(key => key in document);
+    })();
+
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      container.className = "unity-mobile";
+      config.devicePixelRatio = 1;
+    }
+
+    canvas.style.background = `url('${buildUrl}/ts2.jpg') center / cover`;
+    loadingCover.style.display = "";
+
+    const script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+      createUnityInstance(canvas, config, (progress) => {
+        spinner.style.display = "none";
+        progressBarEmpty.style.display = "";
+        progressBarFull.style.width = `${progress * 100}%`;
+      }).then((unityInstance) => {
+        loadingCover.style.display = "none";
+
+        if (canFullscreen && !hideFullScreenButton) {
+          fullscreenButton.style.display = "";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }
+      }).catch(alert);
+    };
+
+    document.body.appendChild(script);
+  </script>
+</body>
+</html>
