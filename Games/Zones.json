@@ -18,5 +18,10 @@
     "name": "Time Shooter 3",
     "cover": "/Games/Files/Time Shooter 3/index.jpg",
     "url": "/Games/Files/Time Shooter 3/index.html"
+  },
+  {
+    "name": "Time Shooter 2",
+    "cover": "/Games/Files/Time Shooter 2/index.png",
+    "url": "/Games/Files/Time Shooter 2/index.html"
   }
 ]
