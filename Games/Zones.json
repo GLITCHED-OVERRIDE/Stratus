@@ -43,5 +43,10 @@
     "name": "Bendy and The Ink Machine",
     "cover": "/Games/Files/Bendy and the Ink Machine/index.jpg",
     "url": "/Games/Files/Bendy and the Ink Machine/index.html"
+  },
+  {
+    "name": "BERGENTRUCK_201X",
+    "cover": "/Games/Files/BERGENTRUCK_201X/index.png",
+    "url": "/Games/Files/BERGENTRUCK_201X/index.html"
   }
 ]
