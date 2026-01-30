@@ -23,5 +23,10 @@
     "name": "Time Shooter 2",
     "cover": "/Games/Files/Time Shooter 2/index.png",
     "url": "/Games/Files/Time Shooter 2/index.html"
+  },
+  {
+    "name": "Amanda the Adventurer",
+    "cover": "/Games/Files/Amanda The Adventurer/index.jpg",
+    "url": "/Games/Files/Amanda The Adventurer/index.html"
   }
 ]
