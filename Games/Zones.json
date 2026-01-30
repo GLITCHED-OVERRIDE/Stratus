@@ -33,5 +33,10 @@
     "name": "Baldi's Basic Plus",
     "cover": "/Games/Files/Baldi's Basics Plus/index.jpg",
     "url": "/Games/Files/Baldi's Basics Plus/index.html"
+  },
+  {
+    "name": "Baldi's Basic Remastered",
+    "cover": "/Games/Files/Baldi Basics Remastered/index.jpg",
+    "url": "/Games/Files/Baldi Basics Remastered/index.html"
   }
 ]
