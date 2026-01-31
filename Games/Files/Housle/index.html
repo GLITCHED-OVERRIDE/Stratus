@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A Real Estate Guessing Game.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Housle">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon-32x32.png" />
+
+  <title>Housle</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<link rel="stylesheet" type="text/css" href="splash/style.css" nonce="gbnfRwM0biuzMHkOCNfqVA">
+<script src="https://www.youtube.com/game_api/v1" nonce="gbnfRwM0biuzMHkOCNfqVA"></script>
+
+<body>
+  <img src="img/housle_logo.png" class="center">
+
+  <script nonce="gbnfRwM0biuzMHkOCNfqVA">
+    startHousle();
+    startFlutter();
+
+    function startFlutter() {
+      var script = document.createElement("script");
+      script.src = "flutter_bootstrap.js";
+      document.body.appendChild(script);
+    }
+
+    function startHousle() {
+      var script = document.createElement("script");
+      script.src = "./housle/main.js";
+      document.body.appendChild(script);
+    }
+  </script>
+</body>
+
+</html>
