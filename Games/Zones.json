@@ -83,5 +83,10 @@
     "name": "Housle",
     "cover": "/Games/Files/Housle/index.webp",
     "url": "/Games/Files/Housle/index.html"
+  },
+  {
+    "name": "Infinite Realms",
+    "cover": "/Games/Files/Infinite Realms/index.webp",
+    "url": "/Games/Files/Infinite Realms/index.html"
   }
 ]
