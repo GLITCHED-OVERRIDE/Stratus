@@ -68,5 +68,10 @@
     "name": "Fragments",
     "cover": "/Games/Files/Fragments/index.png",
     "url": "/Games/Files/Fragments/index.html"
+  },
+  {
+    "name": "Build a Band",
+    "cover": "/Games/Files/Build a Band/index.jpg",
+    "url": "/Games/Files/Build a Band/index.html"
   }
 ]
