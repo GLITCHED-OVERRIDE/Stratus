@@ -58,5 +58,10 @@
     "name": "Buckshot Roulette",
     "cover": "/Games/Files/Buckshot Roulette/index.png",
     "url": "/Games/Files/Buckshot Roulette/index.html"
+  },
+  {
+    "name": "Dead Plate",
+    "cover": "/Games/Files/Dead Plate/index.png",
+    "url":  "/Games/Files/Dead Plate/index.html"
   }
 ]
