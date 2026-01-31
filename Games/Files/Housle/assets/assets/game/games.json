@@ -1,0 +1,800 @@
+[
+  {
+    "id": "Fh4ghp3U22n3ZwsoYfTt",
+    "date": "20260127",
+    "value": 7200000,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "TROPICAL TUESDAYS",
+          "South Carolina"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Hilton Head Island, SC"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "4,622 sqft"
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "5 bed 5.5 bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "0.4 acres lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "3 car garage"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "0Ro3T0bW4pZHGbW74A35",
+    "date": "20260128",
+    "value": 529500,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "WILD WEDNESDAYS",
+          "New Mexico"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "La Luz, NM"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "2,886 sqft"
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "3 bed 3.5 bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "4.96 acre lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "2 Cars Garage"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "C8maHyb9TrM2tBjGS9sE",
+    "date": "20260129",
+    "value": 599000,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "THRIFTY THURSDAYS",
+          "Pennsylvania"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "King of Prussia, PA",
+          "16 miles to Philadelphia, PA"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "2,100 sqft"
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "4 bed 2.5 bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "0.51 acre lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "Bonus flex room, laundry room",
+          "with storage cabinets and a wash basin"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dUIjOmWNLMLwpsBHwdhF",
+    "date": "20260130",
+    "value": 1535000,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "North Carolina"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Charlotte, NC"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "3,319 sqft "
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "4 bed 4 bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "0.23 acre lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "2 Cars Garage"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "XwkracpM0j3BhLZjVxMt",
+    "date": "20260131",
+    "value": 3699000,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "SERENE SATURDAYS",
+          "Florida"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Gulfport, FL",
+          "20 miles to Tampa, FL"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "4,445 sqft"
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "4 bed 4 bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "8,830 sqft lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "3 Cars Garage"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xDRYVwZLGogfcf1KqNpC",
+    "date": "20260201",
+    "value": 3600000,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "STYLISH SUNDAYS",
+          "Colorado"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Colorado Springs, CO"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "7,383 sqft "
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "4 bed 3.5+ bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "9.99 acre lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "3 Cars Garage"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "VTXdON18GD2Dkxqa5G6f",
+    "date": "20260202",
+    "value": 34900000,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "MANSION MONDAY",
+          "Florida"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Naples, FL"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "7,210 sqft"
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "5 bed 5.5 bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "0.6 acre lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "3 Cars Garage"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "X2yBtRcl4XgmZIujEeis",
+    "date": "20260203",
+    "value": 19800000,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "TROPICAL TUESDAYS",
+          "California"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Belvedere, CA",
+          "7 miles to San Francisco, CA"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "5,895 sqft"
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "5 bed 5.5+ bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "0.41 acre lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "2 Cars Garage "
+        ]
+      }
+    ]
+  },
+  {
+    "id": "W8ZLnqebRRvvh33RFHBO",
+    "date": "20260204",
+    "value": 3750000,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "WILD WEDNESDAYS",
+          "Alabama"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Birmingham, AL"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "12,781 sqft"
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "4 bed 5.5+ bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "3.9 acre lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "3 Cars Garage "
+        ]
+      }
+    ]
+  },
+  {
+    "id": "6BiUcloudh77Qiac5S5b",
+    "date": "20260205",
+    "value": 619500,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "THRIFTY THURSDAYS",
+          "Texas"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "The Woodlands, TX",
+          "29 miles to Houston, TX"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "3,027 sqft"
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "3 bed 3.5 bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "6,926 sqft lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "2 Cars Garage"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "KylToxabaNKBjXL6Dzh7",
+    "date": "20260206",
+    "value": 1800000,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "Massachusetts"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Orleans, MA"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "2,513 sqft"
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "3 bed 2.5 bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "1.02 acre lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "2 Cars Garage"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "uNmzQM1czhzbfTlQqmR5",
+    "date": "20260207",
+    "value": 6490000,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "SERENE SATURDAYS",
+          "Florida"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Inlet Beach, FL"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "5,288 sqft"
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "5 bed 6.5 bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "8,276 sqft lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "2 Cars Garage"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cKBHn4hCdGRdY3lGmwAA",
+    "date": "20260208",
+    "value": 3750000,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "STYLISH SUNDAYS",
+          "Connecticut"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Westport, CT",
+          "45 miles to New York, NY"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "10,104 sqft"
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "7 bed 7.5 bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "Iconic 16-room residence"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "Chefs eat-in kitchen, media room, wine cellar"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "9OE3iUQ5Z0KhSBbtO9bd",
+    "date": "20260209",
+    "value": 3249900,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "MANSION MONDAY",
+          "Tennessee"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Brentwood, TN",
+          "9 miles to Nashville, TN"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          " 5,341 sqft"
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "5 bed 5.5+ bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "1.07 acre lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "4 Cars Garage"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bwjstaWiyOjzhSwEqEtJ",
+    "date": "20260210",
+    "value": 4400000,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "TROPICAL TUESDAYS",
+          "Alabama"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Orange Beach, AL "
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "4,252 sqft "
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "8 bed 7.5 bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "0.34 acre lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "Den/media room with a balcony",
+          " 4 covered parking spaces and 8 plus uncovered"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ESen0Qo8j640BpdHl3CG",
+    "date": "20260211",
+    "value": 3200000,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "WILD WEDNESDAYS",
+          "California"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Ramona, CA",
+          "28 miles to San Diego, CA"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "5,016 sqft"
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "3 bed 3.5 bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "8.47 acre lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "3 Cars Garage"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "LILuG4AtqlMLGxariQOF",
+    "date": "20260212",
+    "value": 974900,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "THRIFTY THURSDAYS",
+          "Utah"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Cottonwood Heights, UT"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "3,484 sqft "
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "5 bed 3 bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "7,841 sqft lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "3 Cars Garage"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "wNTEH2kZsiGaJjAqBc8B",
+    "date": "20260213",
+    "value": 2190000,
+    "tips": [
+      {
+        "index": 0,
+        "location": [
+          "Colorado"
+        ]
+      },
+      {
+        "index": 1,
+        "location": [
+          "Longmont, CO"
+        ]
+      },
+      {
+        "index": 2,
+        "location": [
+          "6,430 sqft"
+        ]
+      },
+      {
+        "index": 3,
+        "location": [
+          "4 bed 4 bath"
+        ]
+      },
+      {
+        "index": 4,
+        "location": [
+          "0.75 acre lot"
+        ]
+      },
+      {
+        "index": 5,
+        "location": [
+          "4 Cars Garage"
+        ]
+      }
+    ]
+  }
+]
