@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fragments - Neon Space Breakout</title>
+  <script src="ytgame.js" nonce="-JBN3gMoSaUn_7EenaoIsg"></script>
+  <script type="importmap" nonce="-JBN3gMoSaUn_7EenaoIsg">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.163.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.163.0/examples/jsm/"
+        }
+      }
+    </script>
+  <link rel="stylesheet" href="style.css" nonce="-JBN3gMoSaUn_7EenaoIsg">
+</head>
+
+<body>
+  <div id="app"></div>
+  <div id="ui">
+    <div id="level" class="hidden">Level: 1</div>
+    <div id="score" class="hidden">Score: 0</div>
+    <div id="battery-container" class="hidden">
+        <div class="battery-head"></div>
+        <div class="battery-body">
+          <!-- Segments injected by JS -->
+        </div>
+      </div>
+    <div id="boss-health-container" class="hidden">
+      <div id="boss-health-bar"></div>
+    </div>
+    <div id="item-popup" class="hidden"></div>
+    <div id="start-screen">
+      <h1>FRAGMENTS</h1>
+      <div class="subtitle">Ported By Glitch</div>
+      <div class="menu-buttons">
+        <button id="btn-start">START</button>
+        <button id="btn-details">DETAILS</button>
+      </div>
+      </div>
+      <div id="details-screen" class="hidden">
+        <h2>HOW TO PLAY</h2>
+        <p>WASD / ARROWS / JOYSTICK to Move</p>
+        <p>SPACE / TAP to Shoot</p>
+        <h2>ITEMS</h2>
+        <ul class="item-list">
+          <li><span>⚡</span> Rapid Fire</li>
+          <li><span>💨</span> Speed Boost</li>
+          <li><span>🔫</span> Weapon Upgrade</li>
+          <li><span>❤️</span> Repair (+1 Life)</li>
+          <li><span>🔋</span> Max Life (+1 Max)</li>
+        </ul>
+        <button id="btn-back">BACK</button>
+    </div>
+    <div id="game-over-screen" class="hidden">
+      <h1 id="go-title">GAME OVER</h1>
+      <div id="go-score">Score: 0</div>
+      <p>Press SPACE to Restart</p>
+    </div>
+  </div>
+  <script type="module" src="main.js" nonce="-JBN3gMoSaUn_7EenaoIsg"></script>
+</body>
+
+</html>
