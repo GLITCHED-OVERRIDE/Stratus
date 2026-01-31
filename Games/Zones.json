@@ -63,5 +63,10 @@
     "name": "Dead Plate",
     "cover": "/Games/Files/Dead Plate/index.png",
     "url":  "/Games/Files/Dead Plate/index.html"
+  },
+  {
+    "name": "Fragments",
+    "cover": "/Games/Files/Fragments/index.png",
+    "url": "/Games/Files/Fragments/index.html"
   }
 ]
