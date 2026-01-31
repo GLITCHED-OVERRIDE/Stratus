@@ -88,5 +88,10 @@
     "name": "Infinite Realms",
     "cover": "/Games/Files/Infinite Realms/index.webp",
     "url": "/Games/Files/Infinite Realms/index.html"
+  },
+  {
+    "name": "Void Piercer",
+    "cover": "/Games/Files/Void Piercer/index.png",
+    "url": "/Games/Files/Void Piercer/index.html"
   }
 ]
