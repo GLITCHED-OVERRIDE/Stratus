@@ -78,5 +78,10 @@
     "name": "Bucha Blocks",
     "cover": "/Games/Files/Bucha Blocks/index.png",
     "url": "/Games/Files/Bucha Blocks/index.html"
+  },
+  {
+    "name": "Housle",
+    "cover": "/Games/Files/Housle/index.webp",
+    "url": "/Games/Files/Housle/index.html"
   }
 ]
