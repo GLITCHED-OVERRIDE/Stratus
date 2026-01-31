@@ -53,5 +53,10 @@
     "name": "BLOODMONEY",
     "cover": "/Games/Files/BLOODMONEY/index.jpg",
     "url": "/Games/Files/BLOODMONEY/index.html"
+  },
+  {
+    "name": "Buckshot Roulette",
+    "cover": "/Games/Files/Buckshot Roulette/buckshot-roulette.png",
+    "url": "/Games/Files/Buckshot Roulette/index.html"
   }
 ]
