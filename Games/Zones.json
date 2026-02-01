@@ -98,5 +98,10 @@
     "name": "Draw Climber",
     "cover": "/Games/Files/Draw Climber/index.png",
     "url": "/Games/Files/Draw Climber/index.html"
+  },
+  {
+    "name": "The Deadseat",
+    "cover": "/Games/Files/The Deadseat/index.png",
+    "url": "/Games/Files/The Deadseat/index.html"
   }
 ]
