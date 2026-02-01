@@ -103,5 +103,10 @@
     "name": "The Deadseat",
     "cover": "/Games/Files/The Deadseat/index.png",
     "url": "/Games/Files/The Deadseat/index.html"
+  },
+  {
+    "name": "DeltaTraveler",
+    "cover": "/Games/Files/DELTATRAVELER/index.png",
+    "url": "/Games/Files/DELTATRAVELER/index.html"
   }
 ]
