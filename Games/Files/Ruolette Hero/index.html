@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Roulette Hero</title>
+
+  <link rel="shortcut icon" href="TemplateData/favicon.ico">
+
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #unity-container {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      inset: 0;
+    }
+
+    #unity-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      outline: none;
+    }
+
+    /* Completely remove Unity UI junk */
+    #unity-loading-bar,
+    #unity-warning,
+    #unity-footer {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="unity-container">
+    <canvas id="unity-canvas" tabindex="-1"></canvas>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("unity-canvas");
+
+    /* Disable Unity banners entirely */
+    function unityShowBanner() {}
+
+    const buildUrl = "Build";
+    const loaderUrl = buildUrl + "/Web.loader.js";
+
+    const config = {
+      dataUrl: buildUrl + "/Web.data.br",
+      frameworkUrl: buildUrl + "/Web.framework.js.br",
+      codeUrl: buildUrl + "/Web.wasm.br",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "Free Lives",
+      productName: "Roulette Hero",
+      productVersion: "0.1",
+      showBanner: unityShowBanner,
+    };
+
+    /* Force fullscreen canvas resize */
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    const script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+      createUnityInstance(canvas, config, () => {})
+        .catch(() => {
+          /* swallow errors silently */
+        });
+    };
+
+    document.body.appendChild(script);
+  </script>
+</body>
+</html>
