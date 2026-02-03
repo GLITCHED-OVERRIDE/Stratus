@@ -118,5 +118,10 @@
     "name": "Roulette Hero",
     "cover": "/Games/Files/Ruolette Hero/index.png",
     "url": "/Games/Files/Ruolette Hero/index.html"
+  },
+  {
+    "name": "Solar Sandbox",
+    "cover": "/Games/Files/Solar Sandbox/index.jpg",
+    "url": "/Games/Files/Solar Sandbox/index.html"
   }
 ]
