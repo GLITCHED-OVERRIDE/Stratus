@@ -128,5 +128,10 @@
     "name": "Dominoir",
     "cover": "/Games/Files/Dominoir/index.png",
     "url": "/Games/Files/Dominoir/index.html"
+  },
+  {
+    "name": "Hollow Knight",
+    "cover": "/Games/Files/Hollow Knight/index.png",
+    "url": "/Games/Files/Hollow Knight/index.html"
   }
 ]
