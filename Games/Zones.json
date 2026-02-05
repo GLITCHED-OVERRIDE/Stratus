@@ -123,5 +123,10 @@
     "name": "Solar Sandbox",
     "cover": "/Games/Files/Solar Sandbox/index.jpg",
     "url": "/Games/Files/Solar Sandbox/index.html"
+  },
+  {
+    "name": "Dominoir",
+    "cover": "/Games/Files/Dominoir/index.png",
+    "url": "/Games/Files/Dominoir/index.html"
   }
 ]
