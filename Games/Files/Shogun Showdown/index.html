@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Shogun Showdown</title>
+
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #unity-container {
+      position: fixed;
+      inset: 0;
+      background: #000;
+    }
+
+    #unity-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      outline: none;
+      border: none;
+      background: #000;
+    }
+
+    #unity-loading-bar,
+    #unity-warning,
+    #unity-footer {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="unity-container">
+    <canvas id="unity-canvas"></canvas>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("unity-canvas");
+
+    function unityShowBanner() {
+      /* disabled */
+    }
+
+    const buildUrl = "Build";
+    const loaderUrl = buildUrl + "/ShogunShowdown_WebGL.loader.js";
+
+    const config = {
+      dataUrl: buildUrl + "/ShogunShowdown_WebGL.data.gz",
+      frameworkUrl: buildUrl + "/ShogunShowdown_WebGL.framework.js.gz",
+      codeUrl: buildUrl + "/ShogunShowdown_WebGL.wasm.gz",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "Roboatino",
+      productName: "ShogunShowdown",
+      productVersion: "0.2.1",
+      showBanner: unityShowBanner,
+    };
+
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      config.devicePixelRatio = 1;
+    }
+
+    const script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+      createUnityInstance(canvas, config, () => {})
+        .catch(err => alert(err));
+    };
+
+    document.body.appendChild(script);
+  </script>
+</body>
+</html>
