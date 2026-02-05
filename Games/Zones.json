@@ -133,5 +133,10 @@
     "name": "Hollow Knight",
     "cover": "/Games/Files/Hollow Knight/index.png",
     "url": "/Games/Files/Hollow Knight/index.html"
+  },
+  {
+    "name": "Retro Bowl",
+    "cover": "/Games/Files/Retro Bowl/index.png",
+    "url": "/Games/Files/Retro Bowl/index.html"
   }
 ]
