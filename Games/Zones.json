@@ -148,5 +148,10 @@
     "name": "FeedVid Live",
     "cover": "/Games/Files/FeedVid Live/index.png",
     "url": "/Games/Files/FeedVid Live/index.html"
+  },
+  {
+    "name": "1 on 1 Soccer",
+    "cover": "/Games/Files/1 on 1 soccer/index.png",
+    "url": "Games/Files/1 on 1 soccer/index.html"
   }
 ]
