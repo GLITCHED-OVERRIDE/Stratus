@@ -138,5 +138,10 @@
     "name": "Retro Bowl",
     "cover": "/Games/Files/Retro Bowl/index.png",
     "url": "/Games/Files/Retro Bowl/index.html"
+  },
+  {
+    "name": "Shogun Showdown",
+    "cover": "/Games/Files/Shogun Showdown/index.avif",
+    "url": "/Games/Files/Shogun Showdown/index.html"
   }
 ]
