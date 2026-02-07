@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Arthur's Nightmare</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>  
+    <script>
+    window.fileMergerConfig = {
+      files: [
+        { name: 'web.data.unityweb', parts: 2 },
+        { name: 'web.asm.code.unityweb', parts: 2 },
+      ],
+      basePath: 'Build/',
+      debug: true
+    };
+  </script>
+  <script src="merge.js" ></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/web.json", {onProgress: UnityProgress});
+    </script>
+  </head>
+  <body>
+    <div class="webgl-content">
+      <style>
+        body {
+          margin: 0;
+          overflow: hidden;
+        }
+      </style>
+      <div id="gameContainer" style="width: 100vw; height: 100vh;"></div>
+      </div>
+    </div>
+  </body>
+</html>
