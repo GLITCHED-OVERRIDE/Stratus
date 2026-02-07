@@ -153,5 +153,10 @@
     "name": "1 on 1 Soccer",
     "cover": "/Games/Files/1 on 1 soccer/index.png",
     "url": "/Games/Files/1 on 1 soccer/index.html"
+  },
+  {
+    "name": "10 Bullets",
+    "cover": "/Games/Files/10 Bullets/index.png",
+    "url": "/Games/Files/10 Bullets/index.html"
   }
 ]
