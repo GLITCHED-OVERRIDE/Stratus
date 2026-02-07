@@ -183,5 +183,10 @@
     "name": "Minesweeper Plus",
     "cover": "/Games/Files/Minesweeper Plus/index.png",
     "url": "/Games/Files/Minesweeper Plus/index.html"
+  },
+  {
+    "name": "Class of 09",
+    "cover": "/Games/Files/Class of 09/index.jpg",
+    "url": "/Games/Files/Class of 09/index.html"
   }
 ]
