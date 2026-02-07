@@ -168,5 +168,10 @@
     "name": "A Koopas Revenge 2",
     "cover": "/Games/Files/A Koopas Revenge 2/index.png",
     "url": "Games/Files/A Koopas Revenge 2/index.html"
+  }, 
+  {
+    "name": "A Koopas Revenge",
+    "cover": "/Games/Files/A Koopas Revenge/index.png",
+    "url": "/Games/Files/A Koopas Revenge/index.html"
   }
 ]
