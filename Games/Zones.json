@@ -178,5 +178,10 @@
     "name": "Arthur's Nightmare",
     "cover": "/Games/Files/Arthur's Nightmare/index.png",
     "url": "/Games/Files/Arthur's Nightmare/index.html"
+  },
+  {
+    "name": "Minesweeper Plus",
+    "cover": "/Games/Files/Minesweeper Plus/index.png",
+    "url": "/Games/Files/Minesweeper Plus/index.html"
   }
 ]
