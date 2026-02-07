@@ -158,5 +158,10 @@
     "name": "10 Bullets",
     "cover": "/Games/Files/10 Bullets/index.png",
     "url": "/Games/Files/10 Bullets/index.html"
+  },
+  {
+    "name": "1v1 Tennis",
+    "cover": "/Games/Files/1v1 Tennis/index.png",
+    "url": "/Games/Files/1v1 Tennis/index.html"
   }
 ]
