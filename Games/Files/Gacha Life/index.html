@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Gacha Life</title>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AndreajnRcm4/b398dl2h74v@9a23fbb2373d743a564873251cbb57736ebc1f73/style.css">
+</head>
+
+<body style="margin:0;background:black;overflow:hidden;">
+<script src="https://cdn.jsdelivr.net/gh/u-cvlassrom-y/google@main/ruffle.js"></script>
+
+<div id="player" style="width:100vw;height:100vh;"></div>
+
+<script>
+(async () => {
+
+const parts = [
+  "game.swf.part1",
+  "game.swf.part2",
+  "game.swf.part3",
+  "game.swf.part4",
+  "game.swf.part5"
+];
+
+// Fetch parts
+const buffers = await Promise.all(parts.map(p =>
+  fetch(p).then(r => {
+    if (!r.ok) throw "Missing " + p;
+    return r.arrayBuffer();
+  })
+));
+
+// Merge parts
+let size = 0;
+for (const b of buffers) size += b.byteLength;
+
+const merged = new Uint8Array(size);
+let offset = 0;
+for (const b of buffers) {
+  merged.set(new Uint8Array(b), offset);
+  offset += b.byteLength;
+}
+
+// Blob URL
+const blob = new Blob([merged], { type: "application/x-shockwave-flash" });
+const url = URL.createObjectURL(blob);
+
+// Ruffle load (correct API)
+const ruffle = window.RufflePlayer.newest();
+const player = ruffle.createPlayer();
+player.style.width = "100%";
+player.style.height = "100%";
+document.getElementById("player").appendChild(player);
+
+player.load({ url });
+
+})();
+</script>
+
+</body>
+</html>
