@@ -233,5 +233,10 @@
     "name": "The Man From The Window",
     "cover": "/Games/Files/The Man From The Window/index.png",
     "url": "/Games/Files/The Man From The Window/index.html"
+  },
+  {
+    "name": "OvO",
+    "cover": "/Games/Files/OvO/index.png",
+    "url": "/Games/Files/OvO/index.html"
   }
 ]
