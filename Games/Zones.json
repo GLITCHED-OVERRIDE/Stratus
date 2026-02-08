@@ -193,5 +193,10 @@
     "name": "Raft",
     "cover": "/Games/Files/Raft/index.png",
     "url": "/Games/Files/Raft/index.png"
+  },
+  {
+    "name": "Gacha Life",
+    "cover": "/Games/Files/Gacha Life/index.jpg",
+    "url": "/Games/Files/Gacha Life/index.html"
   }
 ]
