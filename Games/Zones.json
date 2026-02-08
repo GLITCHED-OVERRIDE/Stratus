@@ -203,5 +203,10 @@
     "name": "Gachaverse",
     "cover": "/Games/Files/Gacha Verse/index.jpg",
     "url": "/Games/Files/Gacha Verse/index.html"
+  },
+  {
+    "name": "Learn To Fly",
+    "cover": "/Games/Files/Learn to Fly/index.png",
+    "url": "/Games/Files/Learn to Fly/index.html"
   }
 ]
