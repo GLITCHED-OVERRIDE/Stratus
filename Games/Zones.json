@@ -228,5 +228,10 @@
     "name": "Slender",
     "cover": "/Games/Files/Slender/index.jpg",
     "url": "/Games/Files/Slender/index.html"
+  },
+  {
+    "name": "The Man From The Window",
+    "cover": "/Games/Files/The Man From The Window/index.png",
+    "url": "/Games/Files/The Man From The Window/index.html"
   }
 ]
