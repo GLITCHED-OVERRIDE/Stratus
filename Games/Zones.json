@@ -238,5 +238,10 @@
     "name": "OvO",
     "cover": "/Games/Files/OvO/index.png",
     "url": "/Games/Files/OvO/index.html"
+  },
+  {
+    "name": "Age Of War",
+    "cover": "/Games/Files/Age Of War/index.png",
+    "url": "/Games/Files/Age Of War/index.html"
   }
 ]
