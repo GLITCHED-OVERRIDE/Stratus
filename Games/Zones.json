@@ -208,5 +208,10 @@
     "name": "Learn To Fly",
     "cover": "/Games/Files/Learn to Fly/index.png",
     "url": "/Games/Files/Learn to Fly/index.html"
+  },
+  {
+    "name": "Learn To Fly 2",
+    "cover": "/Games/Files/Learn to Fly 2/index.png",
+    "url": "/Games/Files/Learn to Fly 2/index.html"
   }
 ]
