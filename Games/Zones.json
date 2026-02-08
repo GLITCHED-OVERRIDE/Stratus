@@ -198,5 +198,10 @@
     "name": "Gacha Life",
     "cover": "/Games/Files/Gacha Life/index.jpg",
     "url": "/Games/Files/Gacha Life/index.html"
+  },
+  {
+    "name": "Gachaverse",
+    "cover": "/Games/Files/Gacha Verse/index.jpg",
+    "url": "/Games/Files/Gacha Verse/index.html"
   }
 ]
