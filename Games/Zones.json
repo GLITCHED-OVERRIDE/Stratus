@@ -223,5 +223,10 @@
     "name": "ULTRAKILL",
     "cover": "/Games/Files/ULTRAKILL/index.jpg",
     "url": "/Games/Files/ULTRAKILL/index.html"
+  },
+  {
+    "name": "Slender",
+    "cover": "/Games/Files/Slender/index.jpg",
+    "url": "/Games/Files/Slender/index.html"
   }
 ]
