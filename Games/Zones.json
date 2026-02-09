@@ -278,5 +278,10 @@
     "name": "Bike Champ 2",
     "cover": "/Games/Files/Bike Champ 2/index.png",
     "url": "/Games/Files/Bike Champ 2/index.html"
+  },
+  {
+    "name": "SchoolBoy Runaway",
+    "cover": "/Games/Files/SchoolBoy Runaway/index.png",
+    "url": "/Games/Files/SchoolBoy Runaway/index.html"
   }
 ]
