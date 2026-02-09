@@ -253,5 +253,10 @@
     "name": "OvO 2",
     "cover": "/Games/Files/OvO 2/index.png",
     "url": "/Games/Files/OvO 2/index.html"
+  },
+  {
+    "name": "OvO Dimensions",
+    "cover": "/Games/Files/OvO Dimensions/index.png",
+    "url": "/Games/Files/OvO Dimensions/index.html"
   }
 ]
