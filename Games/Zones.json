@@ -263,5 +263,10 @@
     "name": "Battleships",
     "cover": "/Games/Files/Battleship/index.png",
     "url": "/Games/Files/Battleship/Index.html"
+  },
+  {
+    "name": "Big Red Button",
+    "cover": "/Games/Files/Big Red Button/index.png",
+    "url": "/Games/Files/Big Red Button/index.html"
   }
 ]
