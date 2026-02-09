@@ -268,5 +268,10 @@
     "name": "Big Red Button",
     "cover": "/Games/Files/Big Red Button/index.png",
     "url": "/Games/Files/Big Red Button/index.html"
+  },
+  {
+    "name": "Bike Champ",
+    "cover": "/Games/Files/Bike Champ/index.png",
+    "url": "Games/Files/Bike Champ/index.html"
   }
 ]
