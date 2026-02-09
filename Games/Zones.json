@@ -258,5 +258,10 @@
     "name": "OvO Dimensions",
     "cover": "/Games/Files/OvO Dimensions/index.png",
     "url": "/Games/Files/OvO Dimensions/index.html"
+  },
+  {
+    "name": "Battleships",
+    "cover": "/Games/Files/Battleship/index.png",
+    "url": "/Games/Files/Battleship/Index.html"
   }
 ]
