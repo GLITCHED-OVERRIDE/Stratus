@@ -273,5 +273,10 @@
     "name": "Bike Champ",
     "cover": "/Games/Files/Bike Champ/index.png",
     "url": "/Games/Files/Bike Champ/index.html"
+  },
+  {
+    "name": "Bike Champ 2",
+    "cover": "/Games/Files/Bike Champ 2/index.png",
+    "url": "/Games/Files/Bike Champ 2/index.html"
   }
 ]
