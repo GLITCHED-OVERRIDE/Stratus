@@ -398,5 +398,10 @@
     "name": "Riddle Transfer",
     "cover": "/Games/Files/Riddle Transfer/index.png",
     "url": "/Games/Files/Riddle Transfer/index.html"
+  },
+  {
+    "name": "Run",
+    "cover": "/Games/Files/Run/index.png",
+    "url": "/Games/Files/Run/index.html"
   }
 ]
