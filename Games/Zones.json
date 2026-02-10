@@ -293,5 +293,10 @@
     "name": "Bloons Tower Defense",
     "cover": "/Games/Files/Bloons Tower Defense/index.png",
     "url": "/Games/Files/Bloons Tower Defense/index.html"
+  },
+  {
+    "name": "Bloons Tower Defense 2",
+    "cover": "/Games/Files/Bloons Tower Defense 2/index.png",
+    "url": "/Games/Files/Bloons Tower Defense 2/index.html"
   }
 ]
