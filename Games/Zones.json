@@ -313,5 +313,10 @@
     "name": "Bloons Tower Defense 5",
     "cover": "/Games/Files/Bloons Tower Defense 5/index.png",
     "url": "/Games/Files/Bloons Tower Defense 5/index.html"
+  },
+  {
+    "name": "3D Tanks",
+    "cover": "/Games/Files/3D Tanks/index.png",
+    "url": "/Games/Files/3D Tanks/index.html"
   }
 ]
