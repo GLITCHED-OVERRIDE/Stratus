@@ -343,5 +343,10 @@
     "name": "Awesome Tanks 2",
     "cover": "/Games/Files/Awesome Tanks 2/index.png",
     "url": "/Games/Files/Awesome Tanks 2/index.html"
+  },
+  {
+    "name": "Duck Life",
+    "cover": "/Games/Files/Duck Life/index.png",
+    "url": "/Games/Files/Duck Life/index.html"
   }
 ]
