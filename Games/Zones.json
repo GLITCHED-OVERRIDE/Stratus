@@ -308,5 +308,10 @@
     "name": "Bloons Tower Defense 4",
     "cover": "/Games/Files/Bloons Tower Defense 4/index.png",
     "url": "/Games/Files/Bloons Tower Defense 4/index.html"
+  },
+  {
+    "name": "Bloons Tower Defense 5",
+    "cover": "/Games/Files/Bloons Tower Defense 5/index.png",
+    "url": "/Games/Files/Bloons Tower Defense 5/index.html"
   }
 ]
