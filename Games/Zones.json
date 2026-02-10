@@ -318,5 +318,10 @@
     "name": "3D Tanks",
     "cover": "/Games/Files/3D Tanks/index.png",
     "url": "/Games/Files/3D Tanks/index.html"
+  },
+  {
+    "name": "Five Nights at Epstein's",
+    "cover": "/Games/Files/Five Nights at Epstein's/index.png",
+    "url": "/Games/Files/Five Nights at Epstein's/index.html"
   }
 ]
