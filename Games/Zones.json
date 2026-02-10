@@ -408,5 +408,10 @@
     "name": "Run 2",
     "cover": "/Games/Files/Run 2/index.png",
     "url": "/Games/Files/Run 2/index.html"
+  },
+  {
+    "name": "Vex",
+    "cover": "/Games/Files/Vex/index.png",
+    "url": "/Games/Files/Vex/index.html"
   }
 ]
