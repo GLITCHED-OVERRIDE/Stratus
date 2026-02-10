@@ -328,5 +328,10 @@
     "name": "Iron Lung",
     "cover": "/Games/Files/Iron Lung/index.png",
     "url": "/Games/Files/Iron Lung/index.html"
+  },
+  {
+    "name": "Gorilla Tag",
+    "cover": "/Games/Files/Gorilla Tag/index.png",
+    "url": "/Games/Files/Gorilla Tag/index.html"
   }
 ]
