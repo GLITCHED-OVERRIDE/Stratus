@@ -403,5 +403,10 @@
     "name": "Run",
     "cover": "/Games/Files/Run/index.png",
     "url": "/Games/Files/Run/index.html"
+  },
+  {
+    "name": "Run 2",
+    "cover": "/Games/Files/Run 2/index.png",
+    "url": "/Games/Files/Run 2/index.html"
   }
 ]
