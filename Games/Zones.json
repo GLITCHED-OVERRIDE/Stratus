@@ -413,5 +413,10 @@
     "name": "Vex",
     "cover": "/Games/Files/Vex/index.png",
     "url": "/Games/Files/Vex/index.html"
+  },
+  {
+    "name": "Wheely",
+    "cover": "/Games/Files/Wheely/index.png",
+    "url": "/Games/Files/Wheely/index.html"
   }
 ]
