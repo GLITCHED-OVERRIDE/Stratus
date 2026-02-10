@@ -363,5 +363,10 @@
     "name": "Duck Life 4",
     "cover": "/Games/Files/Duck Life 4/index.png",
     "url": "/Games/Files/Duck Life 4/index.html"
+  },
+  {
+    "name": "Duck Life 5",
+    "cover": "/Games/Files/Duck Life 5/index.png",
+    "url": "/Games/Files/Duck Life 5/index.html"
   }
 ]
