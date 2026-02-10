@@ -368,5 +368,10 @@
     "name": "Duck Life 5",
     "cover": "/Games/Files/Duck Life 5/index.png",
     "url": "/Games/Files/Duck Life 5/index.html"
+  },
+  {
+    "name": "Riddle School",
+    "cover": "/Games/Files/Riddle School/index.png",
+    "url": "/Games/Files/Riddle School/index.html"
   }
 ]
