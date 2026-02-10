@@ -378,5 +378,10 @@
     "name": "Riddle School 2",
     "cover": "/Games/Files/Riddle School 2/index.png",
     "url": "/Games/Files/Riddle School 2/index.html"
+  },
+  {
+    "name": "Riddle School 3",
+    "cover": "/Games/Files/Riddle School 3/index.png",
+    "url": "/Games/Files/Riddle School 3/index.html"
   }
 ]
