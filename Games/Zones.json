@@ -338,5 +338,10 @@
     "name": "Awesome Tanks",
     "cover": "/Games/Files/Awesome Tanks/index.png",
     "url": "/Games/Files/Awesome Tanks/index.html"
+  },
+  {
+    "name": "Awesome Tanks 2",
+    "cover": "/Games/Files/Awesome Tanks 2/index.png",
+    "url": "/Games/Files/Awesome Tanks 2/index.html"
   }
 ]
