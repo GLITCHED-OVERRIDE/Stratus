@@ -288,5 +288,10 @@
     "name": "Bank Robbery",
     "cover": "/Games/Files/Bank Robbery/index.png",
     "url": "/Games/Files/Bank Robbery/index.html"
+  },
+  {
+    "name": "Bloons Tower Defense",
+    "cover": "/Games/Files/Bloons Tower Defense/index.png",
+    "url": "/Games/Files/Bloons Tower Defense/index.html"
   }
 ]
