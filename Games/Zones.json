@@ -513,5 +513,10 @@
     "name": "Fancy Pants Adventure 2",
     "cover": "/Games/Files/Fancy Pants Adventure 2/index.png",
     "url": "/Games/Files/Fancy Pants Adventure 2/index.html"
+  },
+  {
+    "name": "Fancy Pants Adventure 3",
+    "cover": "/Games/Files/Fancy Pants Adventure 3/index.png",
+    "url": "/Games/Files/Fancy Pants Adventure 3/index.html"
   }
 ]
