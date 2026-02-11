@@ -468,5 +468,10 @@
     "name": "Abandoned",
     "cover": "/Games/Files/Abandoned/index.png",
     "url": "/Games/Files/Abandoned/index.html"
+  },
+  {
+    "name": "Achievement Unlocked",
+    "cover": "/Games/Files/Achievement Unlocked/index.png", 
+    "url": "/Games/Files/Achievement Unlocked/index.html"
   }
 ]
