@@ -458,5 +458,10 @@
     "name": "World Box",
     "cover": "/Games/Files/World Box/index.png",
     "url": "/Games/Files/World Box/index.html"
+  },
+  {
+    "name": "8 Ball Pool",
+    "cover": "/Games/Files/8 Ball Pool/index.png",
+    "url": "/Games/Files/8 Ball Pool/index.html"
   }
 ]
