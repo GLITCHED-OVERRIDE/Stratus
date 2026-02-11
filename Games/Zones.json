@@ -473,5 +473,10 @@
     "name": "Achievement Unlocked",
     "cover": "/Games/Files/Achievement Unlocked/index.png", 
     "url": "/Games/Files/Achievement Unlocked/index.html"
+  },
+  {
+    "name": "Achievement Unlocked 2",
+    "cover": "/Games/Files/Achievement Unlocked 2/index.png",
+    "url": "/Games/Files/Achievement Unlocked 2/index.html"
   }
 ]
