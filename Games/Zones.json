@@ -493,5 +493,10 @@
     "name": "5B",
     "cover": "/Games/Files/5B/index.png",
     "url": "/Games/Files/5B/index.html"
+  },
+  {
+    "name": "5B: 5*30",
+    "cover": "/Games/Files/5B: 5*30/index.png",
+    "url": "/Games/Files/5B: 5*30/index.html"
   }
 ]
