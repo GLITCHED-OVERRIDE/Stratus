@@ -483,5 +483,10 @@
     "name": "Achievement Unlocked 3",
     "cover": "/Games/Files/Achievement Unlocked 3/index.png",
     "url": "/Games/Files/Achievement Unlocked 3/index.html"
+  },
+  {
+    "name": "Alien Hominid",
+    "cover": "/Games/Files/Alien Hominid/index.png",
+    "url": "/Games/Files/Alien Hominid/index.html"
   }
 ]
