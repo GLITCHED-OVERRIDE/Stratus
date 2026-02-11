@@ -418,5 +418,10 @@
     "name": "Wheely",
     "cover": "/Games/Files/Wheely/index.png",
     "url": "/Games/Files/Wheely/index.html"
+  },
+  {
+    "name": "Wheely 2",
+    "cover": "/Games/Files/Wheely 2/index.png".
+    "url": "/Games/Files/Wheely 2/index.html"
   }
 ]
