@@ -528,5 +528,10 @@
     "name": "Papas Burgeria",
     "cover": "/Games/Files/Papas Burgeria/index.png",
     "url": "/Games/Files/Papas Burgeria/index.html"
+  },
+  {
+    "name": "Papas Freezeria",
+    "cover": "/Games/Files/Papas Freezeria/index.png",
+    "url": "/Games/Files/Papas Freezeria/index.html"
   }
 ]
