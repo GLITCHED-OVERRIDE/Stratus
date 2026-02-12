@@ -533,5 +533,10 @@
     "name": "Papas Freezeria",
     "cover": "/Games/Files/Papas Freezeria/index.png",
     "url": "/Games/Files/Papas Freezeria/index.html"
+  },
+  {
+    "name": "Papas Pancakeria",
+    "cover": "/Games/Files/Papas Pancakeria/index.png",
+    "url": "/Games/Files/Papas Pancakeria/index.html"
   }
 ]
