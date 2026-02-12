@@ -6,145 +6,312 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-  html, body {
-    margin: 0;
-    height: 100%;
-    background: #070707;
-    color: #eee;
-    font-family: system-ui, sans-serif;
-  }
+:root{--bg:#070707;--purple:#9b4dff;}
+html,body{margin:0;height:100%;background:var(--bg);color:white;font-family:system-ui;overflow:hidden}
 
-  #app {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    height: 100%;
-  }
+/* TOP BAR */
+#topbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+    background:rgba(155,50,120,.15);
+    backdrop-filter:blur(10px);
+    display:flex;
+    align-items:center;
+    z-index:10;
+    padding:0 20px;
+    box-sizing:border-box;
+}
+#logo{height:45px;margin-right:20px}
 
-  #games {
-    background: #111;
-    padding: 12px;
-    overflow-y: auto;
-  }
+/* STEAM-STYLE SEARCH BAR */
+#searchContainer{
+    position:relative;
+    flex:1;
+    max-width:600px;
+}
+#searchInput{
+    width:100%;
+    padding:12px 18px;
+    border-radius:30px;
+    border:none;
+    background:rgba(0,0,0,.6);
+    color:white;
+    font-size:16px;
+    transition:.3s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+#searchInput:focus{
+    outline:none;
+    background:rgba(0,0,0,.85);
+    box-shadow: 0 0 10px var(--purple);
+}
+#searchResults{
+    position:absolute;
+    top:50px;
+    width:100%;
+    background:#0a0a0a;
+    border:1px solid rgba(155,77,255,.4);
+    display:none;
+    max-height:300px;
+    overflow-y:auto;
+    border-radius:10px;
+    z-index:50;
+}
+.searchItem{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    cursor:pointer;
+}
+.searchItem img{
+    width:40px;
+    height:40px;
+    object-fit:cover;
+    border-radius:6px;
+}
+.searchItem:hover{background:rgba(155,77,255,.2)}
 
-  .game {
-    cursor: pointer;
-    border: 1px solid #222;
-    border-radius: 6px;
-    margin-bottom: 14px;
-    overflow: hidden;
-  }
+/* SIDEBAR */
+#sidebar{
+    position:fixed;
+    top:70px;
+    left:0;
+    width:70px;
+    height:calc(100% - 70px);
+    background:black;
+    border-right:1px solid rgba(155,77,255,.2);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-top:10px;
+}
+.sideBtn{margin:12px 0;cursor:pointer;opacity:.8}
+.sideBtn:hover{color:var(--purple)}
 
-  .game:hover { border-color: #d22; }
+/* MAIN AREA */
+#menuArea{
+    position:absolute;
+    top:70px;
+    left:70px;
+    width:calc(100% - 70px);
+    height:calc(100% - 70px);
+    padding:20px;
+    overflow-y:auto;
+}
+.sectionTitle{font-size:18px;margin:12px 0;font-weight:600}
 
-  .game img {
-    width: 100%;
-    display: block;
-  }
+/* GAME ROWS */
+.gameRow {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    flex-wrap: nowrap;
+}
 
-  .title {
-    padding: 8px;
-    text-align: center;
-    background: #0b0b0b;
-    font-size: 14px;
-  }
-
-  #player {
+/* GAME TILE */
+.gameTile {
     position: relative;
-    background: black;
-  }
-
-  #toolbar {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 10;
-    display: flex;
-    gap: 8px;
-  }
-
-  #toolbar button {
-    background: #111;
-    color: #fff;
-    border: 1px solid #333;
-    padding: 6px 10px;
+    min-width: 140px;
+    width: 140px;
+    flex: 0 0 auto;
+    aspect-ratio: 1/1;
+    border-radius: 12px;
+    overflow: hidden;
     cursor: pointer;
-  }
+    border: 1px solid rgba(255,255,255,.08);
+    transition: .2s;
+}
+.gameTile:hover{transform:scale(1.05);border-color:var(--purple)}
+.gameTile img{width:100%;height:100%;object-fit:cover}
+.gameTile div{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    padding:6px;
+    font-size:13px;
+    background:linear-gradient(to top,rgba(0,0,0,.85),transparent);
+    text-align:center;
+}
 
-  #toolbar button:hover { border-color: #d22; }
+/* POPUP */
+#gamePopup{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(6px);display:none;z-index:100}
+#popupContent{display:grid;grid-template-columns:240px 1fr 240px;height:100%}
+.sideCol{background:#080808;padding:10px;overflow-y:auto}
+#gameCenter{display:flex;flex-direction:column}
+#gameFrame{flex:1;border:none}
+#gameControls{display:flex;gap:10px;padding:10px;background:#0a0a0a}
+#gameControls button{background:#111;border:1px solid rgba(155,77,255,.4);color:white;padding:8px 14px;cursor:pointer}
 
-  iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
-  #placeholder {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #666;
-  }
+/* CLOSE BUTTON */
+#closePopup{position:absolute;top:10px;right:15px;font-size:22px;cursor:pointer;color:white;z-index:200}
+#closePopup:hover{color:red}
 </style>
 </head>
+
 <body>
 
-<div id="app">
-  <div id="games"></div>
+<div id="topbar">
+  <img src="Icon.png" id="logo">
+  <div id="searchContainer">
+    <input id="searchInput" placeholder="Search games...">
+    <div id="searchResults"></div>
+  </div>
+</div>
 
-  <div id="player">
-    <div id="toolbar">
-      <button id="fullscreenBtn">Fullscreen</button>
-      <button id="popoutBtn">Open Tab</button>
+<div id="sidebar">
+  <div class="sideBtn" id="homeBtn">Home</div>
+  <div class="sideBtn" id="recentBtn">Recent</div>
+  <div class="sideBtn" id="exploreBtn">Explore</div>
+</div>
+
+<div id="menuArea"></div>
+
+<!-- GAME POPUP -->
+<div id="gamePopup">
+  <div id="closePopup">✕</div>
+  <div id="popupContent">
+    <div id="sideLeft" class="sideCol"></div>
+
+    <div id="gameCenter">
+      <iframe id="gameFrame"></iframe>
+      <div id="gameControls">
+        <button id="fsBtn">Fullscreen</button>
+        <button id="tabBtn">Open in New Tab</button>
+      </div>
     </div>
 
-    <div id="placeholder">Select a game</div>
-    <iframe id="frame"></iframe>
+    <div id="sideRight" class="sideCol"></div>
   </div>
 </div>
 
 <script>
-const GAMES_JSON = "/Games/Zones.json";
+const GAMES_JSON="/Games/Zones.json";
+const menuArea=document.getElementById("menuArea");
+const gamePopup=document.getElementById("gamePopup");
+const gameFrame=document.getElementById("gameFrame");
+const sideLeft=document.getElementById("sideLeft");
+const sideRight=document.getElementById("sideRight");
+const searchInput=document.getElementById("searchInput");
+const searchResults=document.getElementById("searchResults");
 
-const gamesEl = document.getElementById("games");
-const frame = document.getElementById("frame");
-const placeholder = document.getElementById("placeholder");
+let games=[];
+let recent=JSON.parse(localStorage.getItem("recentGames")||"[]");
 
-let currentURL = null;
+/* LOAD GAMES */
+fetch(GAMES_JSON).then(r=>r.json()).then(d=>{games=d;loadHome();});
 
-/* Load games */
-fetch(GAMES_JSON)
-  .then(r => r.json())
-  .then(games => {
-    games.forEach(game => {
-      const el = document.createElement("div");
-      el.className = "game";
-      el.innerHTML = `
-        <img src="${game.cover}">
-        <div class="title">${game.name}</div>
-      `;
-      el.onclick = () => loadGame(game.url);
-      gamesEl.appendChild(el);
-    });
-  });
-
-function loadGame(url) {
-  currentURL = url;
-  placeholder.style.display = "none";
-  frame.src = url;
+/* TILE */
+function makeTile(game){
+  const t=document.createElement("div");
+  t.className="gameTile";
+  t.innerHTML=`<img src="${game.cover}"><div>${game.name}</div>`;
+  t.onclick=()=>openGame(game);
+  return t;
 }
 
-/* Fullscreen */
-document.getElementById("fullscreenBtn").onclick = () => {
-  document.getElementById("player").requestFullscreen();
+/* TITLE */
+function title(text){
+  const t=document.createElement("div");
+  t.className="sectionTitle";
+  t.textContent=text;
+  return t;
+}
+
+/* MAKE MULTI ROWS (20 PER ROW) */
+function makeRows(list){
+  for(let i=0;i<list.length;i+=20){
+    const row=document.createElement("div");
+    row.className="gameRow";
+    list.slice(i,i+20).forEach(g=>row.appendChild(makeTile(g)));
+    menuArea.appendChild(row);
+  }
+}
+
+/* HOME */
+function loadHome(){
+  menuArea.innerHTML="";
+  if(recent.length){
+    menuArea.appendChild(title("Recently Played"));
+    makeRows(recent.slice(-40).reverse());
+  }
+  menuArea.appendChild(title("Games You Might Like"));
+  const shuffled=[...games].sort(()=>0.5-Math.random());
+  makeRows(shuffled.slice(0,60));
+}
+
+/* RECENT */
+function loadRecent(){
+  menuArea.innerHTML="";
+  menuArea.appendChild(title("Recently Played"));
+  makeRows(recent.slice().reverse());
+}
+
+/* EXPLORE */
+function loadExplore(){
+  menuArea.innerHTML="";
+  menuArea.appendChild(title("Explore Games"));
+  makeRows(games);
+}
+
+/* OPEN GAME */
+function openGame(game){
+  // update recent games
+  recent=recent.filter(g=>g.url!==game.url);
+  recent.push(game);
+  localStorage.setItem("recentGames",JSON.stringify(recent));
+
+  // auto-update recently played if currently viewing
+  const recentSection = document.querySelector('#menuArea .sectionTitle');
+  if(recentSection && recentSection.textContent==="Recently Played"){
+    loadRecent();
+  }
+
+  gamePopup.style.display="block";
+  gameFrame.src=game.url;
+
+  sideLeft.innerHTML="";
+  sideRight.innerHTML="";
+  const r=games.filter(g=>g.url!==game.url).sort(()=>0.5-Math.random());
+  r.slice(0,5).forEach(g=>sideLeft.appendChild(makeTile(g)));
+  r.slice(5,10).forEach(g=>sideRight.appendChild(makeTile(g)));
+}
+
+/* SEARCH */
+searchInput.oninput=()=>{
+  const q=searchInput.value.toLowerCase();
+  searchResults.innerHTML="";
+  if(!q){searchResults.style.display="none";return;}
+  games.filter(g=>g.name.toLowerCase().includes(q)).slice(0,5).forEach(g=>{
+    const d=document.createElement("div");
+    d.className="searchItem";
+    d.innerHTML=`<img src="${g.cover}"><span>${g.name}</span>`;
+    d.onclick=()=>{openGame(g);searchResults.style.display="none";}
+    searchResults.appendChild(d);
+  });
+  searchResults.style.display="block";
 };
 
-/* Open iframe URL in new tab */
-document.getElementById("popoutBtn").onclick = () => {
-  if (!currentURL) return;
-  window.open(currentURL, "_blank");
-};
+/* BUTTONS */
+document.getElementById("fsBtn").onclick=()=>gameFrame.requestFullscreen();
+document.getElementById("tabBtn").onclick=()=>window.open(gameFrame.src,"_blank");
+document.getElementById("homeBtn").onclick=loadHome;
+document.getElementById("recentBtn").onclick=loadRecent;
+document.getElementById("exploreBtn").onclick=loadExplore;
+
+/* CLOSE POPUP */
+document.getElementById("closePopup").onclick=closePopup;
+gamePopup.onclick=e=>{if(e.target===gamePopup)closePopup();};
+document.onkeydown=e=>{if(e.key==="Escape")closePopup();};
+
+function closePopup(){
+  gamePopup.style.display="none";
+  gameFrame.src="";
+}
 </script>
 
 </body>
