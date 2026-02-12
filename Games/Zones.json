@@ -523,5 +523,10 @@
     "name": "Celeste",
     "cover": "/Games/Files/Celeste/index.png",
     "url": "/Games/Files/Celeste/index.html"
+  },
+  {
+    "name": "Papas Burgeria",
+    "cover": "/Games/Files/Papas Burgeria/index.png",
+    "url": "/Games/Files/Papas Burgeria/index.html"
   }
 ]
