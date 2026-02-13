@@ -558,5 +558,10 @@
     "name": "Clash Royal",
     "cover": "/Games/Files/Clash Royal/index.png",
     "url": "/Games/Files/Clash Royal/index.html"
+  },
+  {
+    "name": "Clash of Clans",
+    "cover": "/Games/Files/Clash of Clans/index.png",
+    "url": "/Games/Files/Clash of Clans/index.html"
   }
 ]
