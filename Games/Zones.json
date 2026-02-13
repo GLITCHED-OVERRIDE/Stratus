@@ -563,5 +563,10 @@
     "name": "Clash of Clans",
     "cover": "/Games/Files/Clash of Clans/index.png",
     "url": "/Games/Files/Clash of Clans/index.html"
+  },
+  {
+    "name": "Battle Cats",
+    "cover": "/Games/Files/Battle Cats/index.png",
+    "url": "/Games/Files/Battle Cats/index.html"
   }
 ]
