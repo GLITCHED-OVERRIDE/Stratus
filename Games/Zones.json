@@ -583,5 +583,10 @@
     "name": "Roblox",
     "cover": "/Games/Files/Roblox/index.png",
     "url": "/Games/Files/Roblox/index.html"
+  },
+  {
+    "name": "Slendy Tubbies 2",
+    "cover": "/Games/Files/Slender Tubbies 2/index.png",
+    "url": "/Games/Files/Slender Tubbies 2/index.html"
   }
 ]
