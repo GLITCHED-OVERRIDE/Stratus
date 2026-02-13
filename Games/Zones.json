@@ -548,5 +548,10 @@
     "name": "Papas Pizzaria",
     "cover": "/Games/Files/Papas Pizzeria/index.png",
     "url": "/Games/Files/Papas Pizzeria/index.html"
+  },
+  {
+    "name": "Snow Rider 3D",
+    "cover": "/Games/Files/Snow Rider 3D/index.png",
+    "url": "/Games/Files/Snow Rider 3D/index.html"
   }
 ]
