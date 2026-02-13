@@ -568,5 +568,10 @@
     "name": "Battle Cats",
     "cover": "/Games/Files/Battle Cats/index.png",
     "url": "/Games/Files/Battle Cats/index.html"
+  },
+  {
+    "name": "Brawl Stars",
+    "cover": "/Games/Files/Brawl Stars/index.png",
+    "url": "/Games/Files/Brawl Stars/index.html"
   }
 ]
