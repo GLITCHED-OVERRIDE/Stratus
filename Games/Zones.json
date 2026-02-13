@@ -573,5 +573,10 @@
     "name": "Brawl Stars",
     "cover": "/Games/Files/Brawl Stars/index.png",
     "url": "/Games/Files/Brawl Stars/index.html"
+  },
+  {
+    "name": "Fortnite",
+    "cover": "/Games/Files/Fortnite/index.png",
+    "url": "/Games/Files/Fortnite/index.html"
   }
 ]
