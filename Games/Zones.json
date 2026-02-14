@@ -593,5 +593,10 @@
     "name": "The Freak Circus",
     "cover": "/Games/Files/The Freak Circus/index.jpg",
     "url": "/Games/Files/The Freak Circus/index.html"
+  },
+  {
+    "name": "Minecraft",
+    "cover": "/Games/Files/Minecraft/index.webp",
+    "url": "/Games/Files/Minecraft/index.html"
   }
 ]
