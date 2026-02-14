@@ -633,5 +633,10 @@
     "name": "Amorphous",
     "cover": "/Games/Files/Amorphous/index.png",
     "url": "/Games/Files/Amorphous/index.html"
+  },
+  {
+    "name": "Angry Birds Space",
+    "cover": "/Games/Files/Angry Birds Space/index.png",
+    "url": "/Games/Files/Angry Birds Space/index.html"
   }
 ]
