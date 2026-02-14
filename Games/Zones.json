@@ -603,5 +603,10 @@
     "name": "Amigo Pancho",
     "cover": "/Games/Files/Amigo Pancho/index.png",
     "url": "/Games/Files/Amigo Pancho/index.html"
+  },
+  {
+    "name": "Amigo Pancho 2",
+    "cover": "/Games/Files/Amigo Pancho 2/index.png",
+    "url": "/Games/Files/Amigo Pancho 2/index.html"
   }
 ]
