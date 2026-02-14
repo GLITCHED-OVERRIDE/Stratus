@@ -598,5 +598,10 @@
     "name": "Minecraft",
     "cover": "/Games/Files/Minecraft/index.webp",
     "url": "/Games/Files/Minecraft/index.html"
+  },
+  {
+    "name": "Amigo Pancho",
+    "cover": "/Games/Files/Amigo Pancho/index.png",
+    "url": "/Games/Files/Amigo Pancho/index.html"
   }
 ]
