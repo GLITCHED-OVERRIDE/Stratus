@@ -628,5 +628,10 @@
     "name": "Amigo Pancho 6",
     "cover": "/Games/Files/Amigo Pancho 6/index.png",
     "url": "/Games/Files/Amigo Pancho 6/index.html"
+  },
+  {
+    "name": "Amorphous",
+    "cover": "/Games/Files/Amorphous/index.png",
+    "url": "/Games/Files/Amorphous/index.html"
   }
 ]
