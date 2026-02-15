@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="curser/curser.css">
 <title>Stratus</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -26,7 +27,7 @@ html,body{margin:0;height:100%;background:var(--bg);color:white;font-family:syst
 }
 #logo{height:45px;margin-right:20px}
 
-/* STEAM-STYLE SEARCH BAR */
+/* SEARCH BAR */
 #searchContainer{
     position:relative;
     flex:1;
@@ -41,12 +42,12 @@ html,body{margin:0;height:100%;background:var(--bg);color:white;font-family:syst
     color:white;
     font-size:16px;
     transition:.3s;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    box-shadow:0 2px 6px rgba(0,0,0,0.5);
 }
 #searchInput:focus{
     outline:none;
     background:rgba(0,0,0,.85);
-    box-shadow: 0 0 10px var(--purple);
+    box-shadow:0 0 10px var(--purple);
 }
 #searchResults{
     position:absolute;
@@ -80,7 +81,7 @@ html,body{margin:0;height:100%;background:var(--bg);color:white;font-family:syst
     position:fixed;
     top:70px;
     left:0;
-    width:70px;
+    width:120px; /* wider sidebar */
     height:calc(100% - 70px);
     background:black;
     border-right:1px solid rgba(155,77,255,.2);
@@ -89,15 +90,54 @@ html,body{margin:0;height:100%;background:var(--bg);color:white;font-family:syst
     align-items:center;
     padding-top:10px;
 }
-.sideBtn{margin:12px 0;cursor:pointer;opacity:.8}
-.sideBtn:hover{color:var(--purple)}
+
+/* Sidebar button with edge-to-edge outline */
+.sideBtn{
+    position:relative;
+    width:100%;          /* full width of sidebar */
+    aspect-ratio:16/9;   /* maintain 16:9 */
+    margin:12px 0;
+    cursor:pointer;
+    color:white;
+    font-size:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:transparent;
+    border:none;
+    z-index:1;
+}
+
+/* Outline fills entire button */
+.sideBtn::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:url("/img/bt-off.png") no-repeat center / cover;
+    z-index:-1;
+    transition:background 0.12s ease;
+}
+
+/* Hover outline */
+.sideBtn:hover::before{
+    background:url("/img/bt-on.png") no-repeat center / cover;
+}
+
+/* Hover text glow */
+.sideBtn:hover{
+    color:var(--purple);
+}
 
 /* MAIN AREA */
 #menuArea{
     position:absolute;
     top:70px;
-    left:70px;
-    width:calc(100% - 70px);
+    left:120px; /* adjust for wider sidebar */
+    width:calc(100% - 120px);
     height:calc(100% - 70px);
     padding:20px;
     overflow-y:auto;
@@ -105,26 +145,26 @@ html,body{margin:0;height:100%;background:var(--bg);color:white;font-family:syst
 .sectionTitle{font-size:18px;margin:12px 0;font-weight:600}
 
 /* GAME ROWS */
-.gameRow {
-    display: flex;
-    gap: 14px;
-    overflow-x: auto;
-    padding-bottom: 12px;
-    flex-wrap: nowrap;
+.gameRow{
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    padding-bottom:12px;
+    flex-wrap:nowrap;
 }
 
 /* GAME TILE */
-.gameTile {
-    position: relative;
-    min-width: 140px;
-    width: 140px;
-    flex: 0 0 auto;
-    aspect-ratio: 1/1;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    border: 1px solid rgba(255,255,255,.08);
-    transition: .2s;
+.gameTile{
+    position:relative;
+    min-width:140px;
+    width:140px;
+    flex:0 0 auto;
+    aspect-ratio:1/1;
+    border-radius:12px;
+    overflow:hidden;
+    cursor:pointer;
+    border:1px solid rgba(255,255,255,.08);
+    transition:.2s;
 }
 .gameTile:hover{transform:scale(1.05);border-color:var(--purple)}
 .gameTile img{width:100%;height:100%;object-fit:cover}
@@ -156,13 +196,14 @@ html,body{margin:0;height:100%;background:var(--bg);color:white;font-family:syst
 <body>
 
 <div id="topbar">
-  <img src="Icon.png" id="logo">
+  <img src="/img/Icon.png" id="logo">
   <div id="searchContainer">
     <input id="searchInput" placeholder="Search games...">
     <div id="searchResults"></div>
   </div>
 </div>
 
+<!-- SIDEBAR -->
 <div id="sidebar">
   <div class="sideBtn" id="homeBtn">Home</div>
   <div class="sideBtn" id="recentBtn">Recent</div>
@@ -222,7 +263,7 @@ function title(text){
   return t;
 }
 
-/* MAKE MULTI ROWS (20 PER ROW) */
+/* MAKE MULTI ROWS */
 function makeRows(list){
   for(let i=0;i<list.length;i+=20){
     const row=document.createElement("div");
@@ -260,13 +301,11 @@ function loadExplore(){
 
 /* OPEN GAME */
 function openGame(game){
-  // update recent games
   recent=recent.filter(g=>g.url!==game.url);
   recent.push(game);
   localStorage.setItem("recentGames",JSON.stringify(recent));
 
-  // auto-update recently played if currently viewing
-  const recentSection = document.querySelector('#menuArea .sectionTitle');
+  const recentSection=document.querySelector('#menuArea .sectionTitle');
   if(recentSection && recentSection.textContent==="Recently Played"){
     loadRecent();
   }
