@@ -60,7 +60,7 @@ input[type="submit"],
 input[type="reset"],
 label[for],
 .clickable {
-	cursor: url('clicker.cur'), pointer;
+	cursor: url('comiclink.cur'), pointer;
 }
 
 input[type="text"],
@@ -70,7 +70,7 @@ input[type="search"],
 input[type="url"],
 input[type="tel"],
 textarea {
-	cursor: url('text.cur'), text;
+	cursor: url('comictext.cur'), text;
 }
 
 a:hover,
@@ -78,19 +78,19 @@ button:hover,
 select:hover,
 input:hover,
 i:hover {
-	cursor: url('clicker.cur'), pointer;
+	cursor: url('comiclink'), pointer;
 }
 
 .navbar-right a,
 .navbar-right a img {
-	cursor: url('clicker.cur'), pointer !important;
+	cursor: url('comiclink.cur'), pointer !important;
 }
 
 .game,
 .game-link,
 .game-thumbnail,
 .game-gallery {
-	cursor: url('clicker.cur'), pointer !important;
+	cursor: url('comiclink.cur'), pointer !important;
 }
 
 .navbar-right a:hover,
@@ -98,10 +98,11 @@ i:hover {
 .game:hover,
 .game-link:hover,
 .game-thumbnail:hover {
-	cursor: url('clicker.cur'), pointer !important;
+	cursor: url('comiclink.cur'), pointer !important;
 }
 
 select:active {
-	cursor: url('clicker.cur'), pointer;
+	cursor: url('comiclink.cur'), pointer;
 
 }
+
