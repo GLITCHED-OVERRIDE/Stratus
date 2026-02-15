@@ -5,7 +5,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	cursor: url('curser.cur'), auto;
+	cursor: url('comic.cur'), auto;
 }
 
 html {
@@ -20,7 +20,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	cursor: url('curser.cur'), auto;
+	cursor: url('comic.cur'), auto;
 	scrollbar-width: thin;
 	scrollbar-color: var(--highlight) var(--bg-alt);
 	position: relative;
@@ -103,4 +103,5 @@ i:hover {
 
 select:active {
 	cursor: url('clicker.cur'), pointer;
+
 }
