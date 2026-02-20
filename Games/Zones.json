@@ -663,5 +663,10 @@
     "name": "FNAF 4",
     "cover": "/Games/Files/FNAF 4/favicon.ico",
     "url": "/Games/Files/FNAF 4/index.html"
+  },
+  {
+    "name": "FNAF Pizzaria Simulator",
+    "cover": "/Games/Files/Five Nights at Freddy's Pizzeria Simulator/favicon.ico",
+    "url": "/Games/Files/Five Nights at Freddy's Pizzeria Simulator/index.html"
   }
 ]
