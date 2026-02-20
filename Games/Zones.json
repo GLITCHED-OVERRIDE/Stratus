@@ -643,5 +643,10 @@
     "name": "Bowmaster",
     "cover": "/Games/Files/Bowsmaster/index.jpg",
     "url": "/Games/Files/Bowsmaster/index.html"
+  },
+  {
+    "name": "FNAF",
+    "cover": "/Games/Files/FNAF/favicon.ico",
+    "url": "/Games/Files/FNAF/index.html"
   }
 ]
