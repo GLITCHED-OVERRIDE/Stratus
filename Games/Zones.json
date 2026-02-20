@@ -648,5 +648,10 @@
     "name": "FNAF",
     "cover": "/Games/Files/FNAF/favicon.ico",
     "url": "/Games/Files/FNAF/index.html"
+  },
+  {
+    "name": "FNAF 2",
+    "cover": "/Games/Files/FNAF 2/favicon.ico",
+    "url": "/Games/Files/FNAF 2/index.html"
   }
 ]
