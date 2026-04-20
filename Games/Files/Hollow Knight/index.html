@@ -3,19 +3,6 @@
 
 <head>
    <meta charset="utf-8">
-   <preload href="sharedassets5.resource" as="fetch"> 
-    <preload href="sharedassets8.resource" as="fetch"> 
-    <preload href="sharedassets13.resource" as="fetch"> 
-    <preload href="sharedassets16.resource" as="fetch">
-    <preload href="sharedassets105.resource" as="fetch">
-    <preload href="sharedassets127.resource" as="fetch">
-    <preload href="sharedassets127.resource" as="fetch">
-    <preload href="sharedassets400.resource" as="fetch">
-    <preload href="sharedassets410.resource" as="fetch">  
-    <preload href="sharedassets411.resource" as="fetch">  
-    <preload href="sharedassets412.resource" as="fetch">  
-    <preload href="sharedassets413.resource" as="fetch"> 
-    <preload href="sharedassets414.resource" as="fetch">  
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <link rel="manifest" href="manifest.json"/>
     <title>Hollow Knight</title>
@@ -53,6 +40,111 @@
         </div>
         <div id="unity-mobile-warning"> WebGL builds are not supported on mobile devices. </div>
     </div>
+ <script>
+(async () => {
+  const FILES = [
+    "./sharedassets5.resource",
+    "./sharedassets8.resource",
+    "./sharedassets10.resource",
+    "./sharedassets13.resource",
+    "./sharedassets14.resource",
+    "./sharedassets16.resource",
+    "./sharedassets105.resource",
+    "./sharedassets127.resource",
+    "./sharedassets400.resource",
+    "./sharedassets410.resource",
+    "./sharedassets411.resource",
+    "./sharedassets412.resource",
+    "./sharedassets413.resource",
+    "./sharedassets414.resource",
+    "./sharedassets416.resource"
+  ];
+
+  const DB_NAME = "asset-cache";
+  const STORE_NAME = "files";
+
+  // ─── Open DB ─────────────────────────────
+  function openDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(DB_NAME, 1);
+
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains(STORE_NAME)) {
+          db.createObjectStore(STORE_NAME);
+        }
+      };
+
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  // ─── Save ─────────────────────────────
+  function saveFile(db, key, blob) {
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, "readwrite");
+      tx.objectStore(STORE_NAME).put(blob, key);
+      tx.oncomplete = resolve;
+      tx.onerror = reject;
+    });
+  }
+
+  // ─── Load ─────────────────────────────
+  function getFile(db, key) {
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, "readonly");
+      const req = tx.objectStore(STORE_NAME).get(key);
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = reject;
+    });
+  }
+
+  const db = await openDB();
+
+  // ─── Download + Cache (parallel) ─────────────────────────────
+  let completed = 0;
+
+  await Promise.all(FILES.map(async (url) => {
+    const cached = await getFile(db, url);
+    if (cached) {
+      console.log("Cached:", url);
+      completed++;
+      return;
+    }
+
+    try {
+      console.log("Downloading:", url);
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("HTTP " + res.status);
+
+      const blob = await res.blob();
+      await saveFile(db, url, blob);
+
+      completed++;
+      console.log(`Saved (${completed}/${FILES.length}):`, url);
+    } catch (e) {
+      console.warn("Failed:", url, e);
+    }
+  }));
+
+  console.log("All assets ready");
+
+  // ─── Fetch override (offline support) ─────────────────────────────
+  const originalFetch = window.fetch;
+
+  window.fetch = async function(resource, options) {
+    if (typeof resource === "string" && FILES.includes(resource)) {
+      const cached = await getFile(db, resource);
+      if (cached) {
+        return new Response(cached);
+      }
+    }
+    return originalFetch(resource, options);
+  };
+
+})();
+</script>
     <script>
         const DB_NAME = "cachedb";
         const STORE_NAME = "files";
